@@ -20,7 +20,5 @@ export class ContentHeaderComponent {
     ngOnInit() {
         this.routeUrls = this.router.url.split("/").splice(1)
         //console.log(this.routeUrls)
-    }
-
-        
+    }    
 }

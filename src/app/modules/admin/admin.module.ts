@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'
 
 //Custom created components
 import { AdminComponent } from './admin.component';
@@ -14,11 +15,14 @@ import { PageNotfoundComponent } from './components/shared/page-notfound/page-no
 //Admin Routes
 import { AdminRoutingModule } from './admin-routing.module';
 import { ContentHeaderComponent } from './components/shared/content-header/content-header.component';
+import { AddUserComponent } from './components/user/add-user/add-user.component';
+import { GetUserComponent } from './components/user/get-user/get-user.component';
 
 @NgModule({
   imports: [
     CommonModule,
     AdminRoutingModule,
+    FormsModule
   ],
   declarations: [
     AdminComponent, 
@@ -27,7 +31,9 @@ import { ContentHeaderComponent } from './components/shared/content-header/conte
     FooterComponent,
     DashboardComponent,
     PageNotfoundComponent,
-    ContentHeaderComponent
+    ContentHeaderComponent,
+    AddUserComponent,
+    GetUserComponent
   ],
   exports: [AdminComponent]
 })
