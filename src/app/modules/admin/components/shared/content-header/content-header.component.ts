@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
+//import { IUrlTree } from '../../../interfaces/url-tree.model'
 
 @Component({
   selector   : 'app-content-header',
@@ -10,14 +11,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ContentHeaderComponent {
     constructor(
         private router: Router,
-        private actRoute: ActivatedRoute    
-    ) { }
+        private actRoute: ActivatedRoute
+    ) {}
     
-    routeUrl: any;
+    title: string = this.actRoute.snapshot.url.toString().toLocaleUpperCase()
+    routeUrls: any;
     
     ngOnInit() {
-        this.routeUrl = this.actRoute.snapshot.url
-        console.log(this.router)
+        this.routeUrls = this.router.url.split("/").splice(1)
+        //console.log(this.routeUrls)
     }
+
         
 }
