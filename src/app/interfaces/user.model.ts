@@ -1,15 +1,18 @@
 export interface IUserResponse {
-    status: number,
-    statusMessage: string,
-    admin: IUser[],
-    accessToken: string
-
+    id: string,
+    userId: string
 }
 
+
 export interface IUser {
-    _id: string,
+    user_id: string,
+    user_role: string,
+    gmail_id: string,
     first_name: string,
-    last_name:string,
+    last_name: string,
+    gender: string,
     email: string,
     password: string,
+    phone_no: number,
+    birth_date: Date
 }

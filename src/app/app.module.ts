@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule }   from '@angular/router';
 
@@ -18,20 +18,25 @@ import { AppRoutingModule } from './app-routing.module';
 //Custom services
 import { AuthService } from './providers/auth/auth.service'
 
+//Route Gaurds
+import { AuthGuard } from './gaurds/auth.guard'
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AdminModule,
     AppRoutingModule
   ],
+  declarations: [
+    AppComponent,
+    LoginComponent
+  ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

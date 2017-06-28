@@ -17,14 +17,16 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { ContentHeaderComponent } from './components/shared/content-header/content-header.component';
 import { AddUserComponent } from './components/user/add-user/add-user.component';
 import { GetUserComponent } from './components/user/get-user/get-user.component';
+import { UpdateUserComponent } from './components/user/update-user/update-user.component'
 
 //Tokens
 import { JQ_TOKEN } from './providers/jquery/jquery.service';
-import { UpdateUserComponent } from './components/user/update-user/update-user.component'
-export declare const jQuery: Object;
+//export declare const jQuery: Object;
 
 //User Services
-import { UserService } from './providers/user/user.service'
+import { UserService } from './providers/user/user.service';
+import { GetProductsComponent } from './components/products/get-products/get-products.component';
+import { AddProductComponent } from './components/products/add-product/add-product.component'
 
 @NgModule({
   imports: [
@@ -42,7 +44,9 @@ import { UserService } from './providers/user/user.service'
     ContentHeaderComponent,
     AddUserComponent,
     GetUserComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    GetProductsComponent,
+    AddProductComponent
   ],
   providers:[
     UserService,
