@@ -18,6 +18,14 @@ import { ContentHeaderComponent } from './components/shared/content-header/conte
 import { AddUserComponent } from './components/user/add-user/add-user.component';
 import { GetUserComponent } from './components/user/get-user/get-user.component';
 
+//Tokens
+import { JQ_TOKEN } from './providers/jquery/jquery.service';
+import { UpdateUserComponent } from './components/user/update-user/update-user.component'
+export declare const jQuery: Object;
+
+//User Services
+import { UserService } from './providers/user/user.service'
+
 @NgModule({
   imports: [
     CommonModule,
@@ -33,7 +41,12 @@ import { GetUserComponent } from './components/user/get-user/get-user.component'
     PageNotfoundComponent,
     ContentHeaderComponent,
     AddUserComponent,
-    GetUserComponent
+    GetUserComponent,
+    UpdateUserComponent
+  ],
+  providers:[
+    UserService,
+    { provide: JQ_TOKEN , useValue: jQuery}
   ],
   exports: [AdminComponent]
 })
