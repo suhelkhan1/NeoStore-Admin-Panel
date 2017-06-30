@@ -8,8 +8,11 @@ import { AddUserComponent } from './components/user/add-user/add-user.component'
 import { GetUserComponent } from './components/user/get-user/get-user.component'
 import { UpdateUserComponent } from './components/user/update-user/update-user.component'
 
+//Products related components
 import { AddProductComponent } from './components/products/add-product/add-product.component'
 import { GetProductsComponent } from './components/products/get-products/get-products.component'
+import { AddProductCategoryComponent } from './components/products/add-product-category/add-product-category.component'
+import { GetProductCategoryComponent } from './components/products/get-product-category/get-product-category.component'
 
 import { AuthGuard } from '../../gaurds/auth.guard'
 
@@ -30,6 +33,8 @@ import { AuthGuard } from '../../gaurds/auth.guard'
             { path:'updateuser/:id', component: UpdateUserComponent},
             { path:'addproduct', component: AddProductComponent},
             { path:'getproducts', component: GetProductsComponent},
+            { path:'addprductcategory', component: AddProductCategoryComponent},
+            { path:'getproductcategories', component: GetProductCategoryComponent},
             { path:'404', component: PageNotfoundComponent },
             //{ path:'**', redirectTo:'404', pathMatch:'full'}
           ]

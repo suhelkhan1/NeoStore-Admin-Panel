@@ -1,8 +1,9 @@
 export interface IUSer {
-    id: number,
-    name: string,
-    username: string,
+    first_name: string,
+    last_name: string,
     email: string,
-    phone: number,
-    website: string
+    gender: string,
+    phone_no: number,
+    birth_date: Date,
+    id: number
 }

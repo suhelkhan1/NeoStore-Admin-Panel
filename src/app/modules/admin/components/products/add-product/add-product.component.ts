@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -12,8 +13,6 @@ export class AddProductComponent implements OnInit {
   icheck: JQuery;
 
   constructor() { }
-
-
   ngOnInit() {
     //Add the login-page class to the body
     this.body.classList.add(this.bodyClasses);//add the class   
@@ -23,8 +22,11 @@ export class AddProductComponent implements OnInit {
       radioClass: "iradio_square-blue",
       increaseArea: "20%" // optional
     });
+  }
 
-}
+  addUser(formValues){
+    console.log(formValues)    
+  }
 
   ngOnDestroy() {
     //remove the login-page class to the body

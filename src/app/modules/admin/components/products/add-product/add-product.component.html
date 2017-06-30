@@ -78,8 +78,7 @@
                     <label for="stockin">Stock in</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-shopping-basket"></i></span>
-                      <input type="password" class="form-control" (ngModel)="stockin" name="stockin" placeholder="Enter Stock"
-                        required>
+                      <input type="password" class="form-control" (ngModel)="stockin" name="stockin" placeholder="Enter Stock" required>
                     </div>
                   </div>
                 </div>
@@ -110,6 +109,14 @@
                       <span class="input-group-addon"><i class="fa fa-cubes"></i></span>
                       <input type="text" class="form-control" (ngModel)="material" name="material" placeholder="Enter Material" required>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-10">
+                  <div class="form-group">
+                    <label for="fileUpload">Upload File</label>
+                    <app-file-upload></app-file-upload>
                   </div>
                 </div>
               </div>

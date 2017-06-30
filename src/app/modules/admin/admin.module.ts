@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { BrowserModule } from '@angular/platform-browser';
+
+import { FileUploadModule } from 'ng2-file-upload'
+ 
 
 //Custom created components
 import { AdminComponent } from './admin.component';
@@ -14,10 +18,15 @@ import { PageNotfoundComponent } from './components/shared/page-notfound/page-no
 
 //Admin Routes
 import { AdminRoutingModule } from './admin-routing.module';
+
+//Other Components
 import { ContentHeaderComponent } from './components/shared/content-header/content-header.component';
 import { AddUserComponent } from './components/user/add-user/add-user.component';
 import { GetUserComponent } from './components/user/get-user/get-user.component';
 import { UpdateUserComponent } from './components/user/update-user/update-user.component'
+import { GetProductsComponent } from './components/products/get-products/get-products.component';
+import { AddProductComponent } from './components/products/add-product/add-product.component';
+import { FileUploadComponent } from './components/shared/file-upload/file-upload.component'
 
 //Tokens
 import { JQ_TOKEN } from './providers/jquery/jquery.service';
@@ -25,14 +34,19 @@ import { JQ_TOKEN } from './providers/jquery/jquery.service';
 
 //User Services
 import { UserService } from './providers/user/user.service';
-import { GetProductsComponent } from './components/products/get-products/get-products.component';
-import { AddProductComponent } from './components/products/add-product/add-product.component'
+
+//Products Services
+import { ProductService } from './providers/product/product.service';
+import { AddProductCategoryComponent } from './components/products/add-product-category/add-product-category.component';
+import { GetProductCategoryComponent } from './components/products/get-product-category/get-product-category.component'
 
 @NgModule({
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    FileUploadModule
   ],
   declarations: [
     AdminComponent, 
@@ -46,10 +60,14 @@ import { AddProductComponent } from './components/products/add-product/add-produ
     GetUserComponent,
     UpdateUserComponent,
     GetProductsComponent,
-    AddProductComponent
+    AddProductComponent,
+    FileUploadComponent,
+    AddProductCategoryComponent,
+    GetProductCategoryComponent
   ],
   providers:[
     UserService,
+    ProductService,
     { provide: JQ_TOKEN , useValue: jQuery}
   ],
   exports: [AdminComponent]

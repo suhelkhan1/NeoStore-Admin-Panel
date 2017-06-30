@@ -14,15 +14,15 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form #addUserForm="ngForm" (ngSubmit)="addUser(addUserForm.value)" novalidate>
+          <form [formGroup]="updateUserForm" (ngSubmit)="updateUser(updateUserForm.value)" novalidate>
             <div class="box-body">
-              <div class="row">
+              <!--<div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="firstName">User Role</label>
+                    <label for="first_name">User Role</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                      <select name="userRoles" class="form-control" required>
+                      <select name="userRoles" class="form-control">
                         <option value="select">Select</option>
                         <option value="admin">Admin</option>
                         <option value="appUser">App User</option>
@@ -30,24 +30,25 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>-->
 
               <div class="row">
                 <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="firstName">First Name</label>
+                  <div class="form-group" [ngClass]="{ 'error' : first_name.invalid && first_name.dirty }">
+                    <label for="first_name">First Name</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                      <input type="text" class="form-control" (ngModel)="firstName" name="firstName" placeholder="Enter First Name" required>
+                      <input type="text" class="form-control" formControlName="first_name" id="first_name" placeholder="Enter First Name">
+                      <em class="text-danger" *ngIf="first_name.invalid && first_name.dirty">Please enter proper First Name</em>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="lastName">Last Name</label>
+                    <label for="last_name">Last Name</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                      <input type="text" class="form-control" (ngModel)="lastName" name="lastName" placeholder="Enter Last Name" required>
+                      <input type="text" class="form-control" formControlName="last_name" id="last_name" placeholder="Enter Last Name">
                     </div>
                   </div>
                 </div>
@@ -56,76 +57,49 @@
                     <label for="email">Email address</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                      <input type="email" class="form-control" (ngModel)="email" name="email" placeholder="Enter email" required>
+                      <input type="email" class="form-control" formControlName="email" id="email" placeholder="Enter email">
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="row">
 
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                      <input type="password" class="form-control" (ngModel)="password" name="password" placeholder="Password" required>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                      <input type="password" class="form-control" (ngModel)="confirmPassword" name="confirmPassword" placeholder="Confirm Password"
-                        required>
-                    </div>
-                  </div>
-                </div>
+              <!--<div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="password">Gender</label>
                     <div class="checkbox icheck">
-                      <label><input type="radio" name="gender" required> <strong>Male</strong> </label>
-                      <label><input type="radio" name="gender" required> <strong>Female</strong> </label>
+                      <label><input type="radio" id="gender"> <strong>Male</strong> </label>
+                      <label><input type="radio" id="gender"> <strong>Female</strong> </label>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>-->
+
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="phoneNumber">Phone Number</label>
+                    <label for="phone_no">Phone Number</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                      <input type="tel" class="form-control" (ngModel)="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number" required>
+                      <input type="tel" class="form-control" formControlName="phone_no" id="phone_no" placeholder="Enter Phone Number">
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="phoneNumber">Date of Birth</label>
+                    <label for="birth_date">Date of Birth</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
-                      <input type="date" class="form-control" (ngModel)="dateOfBirth" name="dateOfBirth" required>
+                      <input type="date" class="form-control" formControlName="birth_date" id="birth_date">
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="checkbox icheck">
-                    <label><input type="checkbox" required> I agree <a href="">Terms & Conditions</a> </label>
-                  </div>
-                </div>
-              </div>
+              </div>              
             </div>
             <!-- /.box-body -->
 
             <div class="box-footer">
-              <button type="submit" [disabled]="addUserForm.invalid" class="btn btn-primary">Save</button>
+              <button type="submit" [disabled]="updateUserForm.invalid" class="btn btn-primary">Save</button>
             </div>
           </form>
         </div>

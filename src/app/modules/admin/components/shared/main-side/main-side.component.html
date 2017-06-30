@@ -51,14 +51,14 @@
             <li><a [routerLink]="['getproducts']"><i class="fa fa-th-list"></i> Products List</a></li>
             <li><a [routerLink]="['addproduct']"><i class="fa fa-plus"></i> Add Product</a></li>
             <li>
-              <a href="#"><i class="fa fa-circle-o"></i> Products Category
+              <a href="#"><i class="fa fa-sitemap"></i> Products Category
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Products Category List</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Add Products Category</a></li>
+                <li><a [routerLink]="['getproductcategories']" href="#"><i class="fa fa-th-list"></i> Products Category List</a></li>
+                <li><a [routerLink]="['addprductcategory']" href="#"><i class="fa fa-plus"></i> Add Products Category</a></li>
               </ul>
             </li>
           </ul>

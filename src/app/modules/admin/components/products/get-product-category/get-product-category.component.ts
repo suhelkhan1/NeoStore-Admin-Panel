@@ -5,13 +5,13 @@ import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
 import { ProductService } from '../../../providers/product/product.service'
 
 @Component({
-  selector: 'app-get-products',
-  templateUrl: './get-products.component.html',
-  styleUrls: ['./get-products.component.css']
+  selector: 'app-get-product-category',
+  templateUrl: './get-product-category.component.html',
+  styleUrls: ['./get-product-category.component.css']
 })
-export class GetProductsComponent implements OnInit {
+export class GetProductCategoryComponent implements OnInit {
 
-   constructor(
+  constructor(
     @Inject(JQ_TOKEN) private $ : any,
     public elementRef: ElementRef,
     private productService : ProductService,
@@ -19,20 +19,20 @@ export class GetProductsComponent implements OnInit {
   ) { 
     this.elementRef = elementRef;
   }
-  products: any
+  productCategories: any
 
   getProducts(){
     this.$(document).ready( ()=> {
-      let el = this.$(this.elementRef.nativeElement).find("#productsTable")[0];
+      let el = this.$(this.elementRef.nativeElement).find("#productCategoryTable")[0];
       this.$(el).DataTable();
     })
   }
   editClickListner(product){
-    this.route.navigate(['admin/updateuser/', product.id])
+    this.route.navigate(['admin/updateProductCategory/', product.id])
   }
   ngOnInit() {
-    this.productService.getProductDetails().subscribe( (response) => {
-      this.products = response
+    this.productService.getProductCategories().subscribe( (response) => {
+      this.productCategories = response
       this.getProducts()
     });  
   }

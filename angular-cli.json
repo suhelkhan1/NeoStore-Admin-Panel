@@ -26,6 +26,7 @@
         "../node_modules/ionicons/dist/css/ionicons.css",
         "admin.less",
         "../node_modules/datatables.net-bs/css/dataTables.bootstrap.css"
+        
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

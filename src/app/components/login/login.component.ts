@@ -71,7 +71,8 @@ export class LoginComponent implements OnInit {
       userId: this.userId
     }
     this.authService.getUserDetails(userCrendentials).subscribe( response =>{
-      console.log('Auth Gaurd', response);
+      //console.log('Auth Gaurd', response);
+      return response
     })
   }
 

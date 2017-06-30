@@ -9,15 +9,16 @@ export class UserService {
   constructor(
     private http: Http
   ) { }
-
-  getUser(): Observable<IUSer>{
-    return this.http.get('https://jsonplaceholder.typicode.com/users').map((response: Response) => {
+  url = 'http://10.0.100.213:3000/api'
+  accesToken = JSON.parse(localStorage.getItem('currentUser'))
+  getUsers(): Observable<IUSer>{
+    return this.http.get(this.url + '/user_accounts?access_token=' + this.accesToken).map((response: Response) => {
       return <IUSer>response.json()
     }).catch(this.handleError)
   }
 
-  updateUser(userId): Observable<IUSer>{
-    return this.http.get('https://jsonplaceholder.typicode.com/users/', userId).map((response: Response) => {
+  getUser(userId): Observable<IUSer>{
+    return this.http.get( this.url + '/user_accounts/' + userId + '?access_token=' + this.accesToken).map((response: Response) => {
       return <IUSer>response.json()
     }).catch(this.handleError)
   }

@@ -31,7 +31,7 @@ export class GetUserComponent implements OnInit {
     this.route.navigate(['admin/updateuser/', user.id])
   }
   ngOnInit() {
-    this.userService.getUser().subscribe( (response) => {
+    this.userService.getUsers().subscribe( (response) => {
       this.users = response
       this.getUser()
     });
