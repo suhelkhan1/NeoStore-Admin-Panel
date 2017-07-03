@@ -42,7 +42,7 @@ export class UpdateUserComponent implements OnInit {
         this.user = response
         this.updateUserValidation(this.user)
       })
-    } )
+    })
   }
 
   updateUserValidation(user){

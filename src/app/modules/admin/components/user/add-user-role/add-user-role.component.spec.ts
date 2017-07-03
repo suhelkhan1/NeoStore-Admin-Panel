@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GetProductCategoryComponent } from './get-product-category.component';
+import { AddUserRoleComponent } from './add-user-role.component';
 
-describe('GetProductCategoryComponent', () => {
-  let component: GetProductCategoryComponent;
-  let fixture: ComponentFixture<GetProductCategoryComponent>;
+describe('AddUserRoleComponent', () => {
+  let component: AddUserRoleComponent;
+  let fixture: ComponentFixture<AddUserRoleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GetProductCategoryComponent ]
+      declarations: [ AddUserRoleComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GetProductCategoryComponent);
+    fixture = TestBed.createComponent(AddUserRoleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

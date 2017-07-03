@@ -30,9 +30,9 @@
                   <td>{{productCategory.category_isactive}}</td>                  
                   <th class="text-center">
                     <div class="btn btn-group no-padding">
-                      <button type="button" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></button>
-                      <button (click)="editClickListner(product)" type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></button>
-                      <button type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+                      <button (click)="veiwClickListner(productCategory)"type="button" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></button>
+                      <button (click)="editClickListner(productCategory)" type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></button>
+                      <button (click)="deleteProductCategory(productCategory)" type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
                     </div>
                   </th>
                 </tr>

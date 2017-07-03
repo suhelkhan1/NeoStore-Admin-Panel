@@ -14,7 +14,7 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form #addUserForm="ngForm" (ngSubmit)="addUser(addUserForm.value)" novalidate>
+          <form [formGroup]="addUserForm" (ngSubmit)="addUser(addUserForm.value)" novalidate>
             <div class="box-body">
               <div class="row">
                 <div class="col-md-4">
@@ -22,7 +22,7 @@
                     <label for="firstName">User Role</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                      <select name="userRoles" class="form-control" required>
+                      <select id="userRoles" class="form-control" required>
                         <option value="select">Select</option>
                         <option value="admin">Admin</option>
                         <option value="appUser">App User</option>
@@ -38,7 +38,7 @@
                     <label for="firstName">First Name</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                      <input type="text" class="form-control" (ngModel)="firstName" name="firstName" placeholder="Enter First Name" required>
+                      <input type="text" class="form-control" formControlName="firstName" id="firstName" placeholder="Enter First Name" required>
                     </div>
                   </div>
                 </div>
@@ -47,7 +47,7 @@
                     <label for="lastName">Last Name</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                      <input type="text" class="form-control" (ngModel)="lastName" name="lastName" placeholder="Enter Last Name" required>
+                      <input type="text" class="form-control" formControlName="lastName" id="lastName" placeholder="Enter Last Name" required>
                     </div>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
                     <label for="email">Email address</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                      <input type="email" class="form-control" (ngModel)="email" name="email" placeholder="Enter email" required>
+                      <input type="email" class="form-control" formControlName="email" id="email" placeholder="Enter email" required>
                     </div>
                   </div>
                 </div>
@@ -70,7 +70,7 @@
                     <label for="password">Password</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                      <input type="password" class="form-control" (ngModel)="password" name="password" placeholder="Password" required>
+                      <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password" required>
                     </div>
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                     <label for="confirmPassword">Confirm Password</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                      <input type="password" class="form-control" (ngModel)="confirmPassword" name="confirmPassword" placeholder="Confirm Password"
+                      <input type="password" class="form-control" formControlName="confirmPassword" id="confirmPassword" placeholder="Confirm Password"
                         required>
                     </div>
                   </div>
@@ -88,8 +88,8 @@
                   <div class="form-group">
                     <label for="password">Gender</label>
                     <div class="checkbox icheck">
-                      <label><input type="radio" name="gender" required> <strong>Male</strong> </label>
-                      <label><input type="radio" name="gender" required> <strong>Female</strong> </label>
+                      <label><input type="radio" id="gender" required> <strong>Male</strong> </label>
+                      <label><input type="radio" id="gender" required> <strong>Female</strong> </label>
                     </div>
                   </div>
                 </div>
@@ -100,7 +100,7 @@
                     <label for="phoneNumber">Phone Number</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                      <input type="tel" class="form-control" (ngModel)="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number" required>
+                      <input type="tel" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="Enter Phone Number" required>
                     </div>
                   </div>
                 </div>
@@ -109,7 +109,7 @@
                     <label for="phoneNumber">Date of Birth</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
-                      <input type="date" class="form-control" (ngModel)="dateOfBirth" name="dateOfBirth" required>
+                      <input type="date" class="form-control" formControlName="dateOfBirth" id="dateOfBirth" required>
                     </div>
                   </div>
                 </div>

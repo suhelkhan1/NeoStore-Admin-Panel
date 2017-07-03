@@ -12,6 +12,8 @@ export class ProductService {
   ) { }
   accessToken = JSON.parse(localStorage.getItem('currentUser'))
   url = 'http://10.0.100.213:3000/api'
+
+  //Products CRUD API calls
   getProductDetails(): Observable<IProduct> {
     return this.http.get(this.url + '/products?access_token=' + this.accessToken).map( (response: Response) => {
       return <IProduct>response.json()
@@ -27,10 +29,34 @@ export class ProductService {
     }).catch(this.handleError)
   }
 
+  //Product Category CRUD API calls
   getProductCategories(): Observable<IProductCategory>{
     return this.http.get(this.url + '/categories?access_token=' + this.accessToken).map( (response:Response) => {
       return <IProductCategory>response.json()
     }).catch(this.handleError)
+  }
+
+  getProductCategory(productCategoryId): Observable<IProductCategory>{
+    return this.http.get(this.url + '/categories/' +productCategoryId+ '?access_token=' + this.accessToken).map( (response: Response) => {
+      return <IProductCategory>response.json()
+    }).catch(this.handleError)
+  }
+
+  updateProductCategory(productCategoryDetails): Observable<IProductCategory>{
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.put(this.url + '/categories/' + productCategoryDetails.id + '?access_token=' + this.accessToken, JSON.stringify(productCategoryDetails), options).map( (response: Response) => {
+      return <IProductCategory>response.json()
+    }).catch(this.handleError)
+  }
+
+  deleteProductCategory(productCategoryId): Observable<IProductCategory>{
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.delete(this.url + '/categories/' + productCategoryId + '?access_token=' + this.accessToken, options).map( (respnse: Response)=>{
+      return <IProductCategory>respnse.json()
+    })
   }
 
   handleError(error: Response) { 

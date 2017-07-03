@@ -1,0 +1,44 @@
+<div class="content-wrapper">
+  <!--content header-->
+  <app-content-header></app-content-header>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Add User Role</h3>
+          </div>
+          <!-- /.box-header -->
+          <!-- form start -->
+          <form [formGroup]="addUserRolesForm" (ngSubmit)="addUserRoles(addUserRolesForm.value)" novalidate>
+            <div class="box-body">
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group" [ngClass]="{ 'error' : category_name.invalid && category_name.dirty }">
+                    <label for="user_role_name">Role Name</label>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-sitemap"></i></span>
+                      <input type="text" class="form-control" formControlName="user_role_name" id="user_role_name" placeholder="Enter Category Name">
+                    </div>
+                    <em class="text-danger" *ngIf="user_role_name.invalid && user_role_name.dirty">Maximum 20 caracter allowed</em>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+
+            <div class="box-footer">
+              <button type="submit" [disabled]="addUserRolesForm.invalid" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /.box -->
+</div>

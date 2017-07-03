@@ -23,22 +23,29 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { ContentHeaderComponent } from './components/shared/content-header/content-header.component';
 import { AddUserComponent } from './components/user/add-user/add-user.component';
 import { GetUserComponent } from './components/user/get-user/get-user.component';
+import { GetUserRoleComponent } from './components/user/get-user-role/get-user-role.component';
+import { AddUserRoleComponent } from './components/user/add-user-role/add-user-role.component';
 import { UpdateUserComponent } from './components/user/update-user/update-user.component'
+import { FileUploadComponent } from './components/shared/file-upload/file-upload.component'
 import { GetProductsComponent } from './components/products/get-products/get-products.component';
 import { AddProductComponent } from './components/products/add-product/add-product.component';
-import { FileUploadComponent } from './components/shared/file-upload/file-upload.component'
+import { AddProductCategoryComponent } from './components/product-categories/add-product-category/add-product-category.component';
+import { GetProductCategoriesComponent } from './components/product-categories/get-product-categories/get-product-categories.component';
+import { UpdateProductCategoryComponent } from './components/product-categories/update-product-category/update-product-category.component';
+import { ViewProductCategoryComponent } from './components/product-categories/view-product-category/view-product-category.component'
 
 //Tokens
 import { JQ_TOKEN } from './providers/jquery/jquery.service';
-//export declare const jQuery: Object;
 
 //User Services
 import { UserService } from './providers/user/user.service';
 
+//toastr service
+import { TOASTR_TOKEN, Toastr } from './providers/toastr/toastr.service'
+declare let toastr: Toastr;
+
 //Products Services
 import { ProductService } from './providers/product/product.service';
-import { AddProductCategoryComponent } from './components/products/add-product-category/add-product-category.component';
-import { GetProductCategoryComponent } from './components/products/get-product-category/get-product-category.component'
 
 @NgModule({
   imports: [
@@ -63,11 +70,16 @@ import { GetProductCategoryComponent } from './components/products/get-product-c
     AddProductComponent,
     FileUploadComponent,
     AddProductCategoryComponent,
-    GetProductCategoryComponent
+    GetProductCategoriesComponent,
+    GetUserRoleComponent,
+    AddUserRoleComponent,
+    UpdateProductCategoryComponent,
+    ViewProductCategoryComponent
   ],
   providers:[
     UserService,
     ProductService,
+    { provide: TOASTR_TOKEN , useValue: toastr},
     { provide: JQ_TOKEN , useValue: jQuery}
   ],
   exports: [AdminComponent]

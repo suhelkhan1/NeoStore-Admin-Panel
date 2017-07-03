@@ -1,0 +1,38 @@
+<div class="content-wrapper">
+  <!--content header-->
+  <app-content-header></app-content-header>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="box box-primary" *ngIf="productCategory">
+          <div class="box-header with-border">
+            <h3 class="box-title">View Product Category</h3>
+          </div>
+          <!-- /.box-header -->
+
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Product Category Name</label>
+                <p>{{productCategory.category_name}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label>Product Category Description</label>
+                <p>{{productCategory.category_description}}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /.box -->
+</div>

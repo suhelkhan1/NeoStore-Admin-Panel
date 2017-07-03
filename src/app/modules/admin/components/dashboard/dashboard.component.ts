@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.areaChart = Morris.Area({
         element: 'revenue-chart',
         resize: true,
