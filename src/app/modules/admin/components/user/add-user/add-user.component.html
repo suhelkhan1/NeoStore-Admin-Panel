@@ -19,45 +19,49 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="firstName">User Role</label>
-                    <div class="input-group">
+                    <label for="userRoles">User Role</label>
+                    <div class="input-group" [ngClass]="{ 'error' : userRoles.invalid && userRoles.dirty }">
                       <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                      <select id="userRoles" class="form-control" required>
-                        <option value="select">Select</option>
-                        <option value="admin">Admin</option>
-                        <option value="appUser">App User</option>
+                      <select formControlName="userRoles" ngControl="userRoles" id="userRoles" class="form-control">
+                        <option [selected]="userRoles.value == null" value="">Select</option>
+                        <option [selected]="userRoles.value == admin" value="admin">Admin</option>
+                        <option [selected]="userRoles.value == appUser" value="appUser">App User</option>
                       </select>
                     </div>
+                    <em class="text-danger" *ngIf="userRoles.invalid && userRoles.dirty">Please select role</em>
                   </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-4">
-                  <div class="form-group">
+                  <div class="form-group" >
                     <label for="firstName">First Name</label>
-                    <div class="input-group">
+                    <div class="input-group" [ngClass]="{ 'error' : firstName.invalid && firstName.dirty }">
                       <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                      <input type="text" class="form-control" formControlName="firstName" id="firstName" placeholder="Enter First Name" required>
+                      <input type="text" class="form-control" formControlName="firstName" id="firstName" placeholder="Enter First Name">
                     </div>
                   </div>
+                  <em class="text-danger" *ngIf="firstName.invalid && firstName.dirty">Please proper first name</em>
                 </div>
                 <div class="col-md-4">
-                  <div class="form-group">
+                  <div class="form-group" >
                     <label for="lastName">Last Name</label>
-                    <div class="input-group">
+                    <div class="input-group" [ngClass]="{ 'error' : lastName.invalid && lastName.dirty }">
                       <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                      <input type="text" class="form-control" formControlName="lastName" id="lastName" placeholder="Enter Last Name" required>
+                      <input type="text" class="form-control" formControlName="lastName" id="lastName" placeholder="Enter Last Name">
                     </div>
+                    <em class="text-danger" *ngIf="lastName.invalid && lastName.dirty">Please proper last name</em>
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="form-group">
+                  <div class="form-group" >
                     <label for="email">Email address</label>
-                    <div class="input-group">
+                    <div class="input-group" [ngClass]="{ 'error' : email.invalid && email.dirty }">
                       <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                      <input type="email" class="form-control" formControlName="email" id="email" placeholder="Enter email" required>
+                      <input type="email" class="form-control" formControlName="email" id="email" placeholder="Enter email">
                     </div>
+                    <em class="text-danger" *ngIf="email.invalid && email.dirty">Please enter valid email</em>
                   </div>
                 </div>
               </div>
@@ -66,51 +70,55 @@
               </div>
               <div class="row">
                 <div class="col-md-4">
-                  <div class="form-group">
+                  <div class="form-group" >
                     <label for="password">Password</label>
-                    <div class="input-group">
+                    <div class="input-group" [ngClass]="{ 'error' : password.invalid && password.dirty }">
                       <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                      <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password" required>
+                      <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password">
                     </div>
+                    <em class="text-danger" *ngIf="password.invalid && password.dirty">Please enter valid password</em>
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="form-group">
+                  <div class="form-group" >
                     <label for="confirmPassword">Confirm Password</label>
-                    <div class="input-group">
+                    <div class="input-group" [ngClass]="{ 'error' : confirmPassword.invalid && confirmPassword.dirty }">
                       <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                      <input type="password" class="form-control" formControlName="confirmPassword" id="confirmPassword" placeholder="Confirm Password"
-                        required>
+                      <input type="password" class="form-control" formControlName="confirmPassword" id="confirmPassword" placeholder="Confirm Password">
                     </div>
+                    <em class="text-danger" *ngIf="confirmPassword.invalid && confirmPassword.dirty">Please enter valid password</em>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="password">Gender</label>
-                    <div class="checkbox icheck">
-                      <label><input type="radio" id="gender" required> <strong>Male</strong> </label>
-                      <label><input type="radio" id="gender" required> <strong>Female</strong> </label>
+                    <label for="gender">Gender</label>
+                    <div class="checkbox icheck" [ngClass]="{ 'error' : gender.invalid && gender.dirty }">
+                      <label><input type="radio" formControlName="gender" [checked]="gender.value === male" value="male" name="gender"> <strong>Male</strong> </label>
+                      <label><input type="radio" formControlName="gender" [checked]="gender.value === female" value="female" name="gender"> <strong>Female</strong> </label>
                     </div>
+                    <em class="text-danger" *ngIf="gender.invalid && gender.dirty">Please select</em>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-4">
-                  <div class="form-group">
+                  <div class="form-group" >
                     <label for="phoneNumber">Phone Number</label>
-                    <div class="input-group">
+                    <div class="input-group" [ngClass]="{ 'error' : phoneNumber.invalid && phoneNumber.dirty }">
                       <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                      <input type="tel" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="Enter Phone Number" required>
+                      <input type="tel" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="Enter Phone Number">
                     </div>
+                    <em class="text-danger" *ngIf="phoneNumber.invalid && phoneNumber.dirty">Please enter phone number</em>
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="phoneNumber">Date of Birth</label>
-                    <div class="input-group">
+                  <div class="form-group" >
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <div class="input-group" [ngClass]="{ 'error' : dateOfBirth.invalid && dateOfBirth.dirty }">
                       <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
-                      <input type="date" class="form-control" formControlName="dateOfBirth" id="dateOfBirth" required>
+                      <input type="date" class="form-control" formControlName="dateOfBirth" id="dateOfBirth">
                     </div>
+                    <em class="text-danger" *ngIf="dateOfBirth.invalid && dateOfBirth.dirty">Please select date of birth</em>
                   </div>
                 </div>
               </div>
@@ -132,5 +140,6 @@
       </div>
     </div>
   </section>
+  
   <!-- /.box -->
 </div>

@@ -31,10 +31,16 @@ export class GetProductsComponent implements OnInit {
     this.route.navigate(['admin/updateuser/', product.id])
   }
   ngOnInit() {
-    this.productService.getProductDetails().subscribe( (response) => {
-      this.products = response
-      this.getProducts()
-    });  
+    this.productService.getProductDetails().subscribe( 
+      (response) => {
+        this.products = response
+        this.getProducts()
+      },
+      (error) => {
+        console.log(error)
+        return error
+      }
+    );  
   }
 
 }

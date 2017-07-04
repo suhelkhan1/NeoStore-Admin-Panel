@@ -1,10 +1,9 @@
-import { OpaqueToken } from '@angular/core';
+import { ToastOptions, ToastsManager } from 'ng2-toastr';
 
-export const TOASTR_TOKEN = new OpaqueToken('toastr');
-
-export interface Toastr {
-  success (msg: string, title?: string): void,
-  info (msg: string, title?: string): void,
-  warning (msg: string, title?: string): void,
-  error (msg: string, title?: string): void,
+export class CustomOption extends ToastOptions {
+  animate = 'flyRight'; // you can override any options available
+  newestOnTop = false;
+  showCloseButton = false;
+  dismiss = 'auto'
+  toastLife = 2000
 }

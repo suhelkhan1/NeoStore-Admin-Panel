@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router }   from '@angular/router';
+import { ToastsManager } from 'ng2-toastr'
 
 import { AuthService } from '../../providers/auth/auth.service'
 
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastsManager
   ) { }
 
   bodyClasses:string = "login-page";
@@ -26,12 +28,9 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   email: FormControl;
   password: FormControl;
-
+  user: any
   
-  userToken: string = JSON.parse(localStorage.getItem('currentUser'));
-  userId: any;
-
-  user: any;
+  errorMessage: string = "";
   
 
   ngOnInit() {
@@ -60,35 +59,22 @@ export class LoginComponent implements OnInit {
       email: this.email,
       password: this.password
     })
-
-    this.getUserDetails(this.userToken, this.userId)
-
-  }
-
-  getUserDetails(userToken, userId){
-    let userCrendentials = {
-      userToken: this.userToken,
-      userId: this.userId
-    }
-    this.authService.getUserDetails(userCrendentials).subscribe( response =>{
-      //console.log('Auth Gaurd', response);
-      return response
-    })
   }
 
   loginAdmin(formValues){
     this.authService.loginAdmin(formValues).subscribe( 
       response => {
           this.user = response;
+          this.toastr.success('logged in', 'Success!')
           this.router.navigate(['admin']);   
       },
-      error => {
+      (error: Error) => {
           this.loginInvalid = true
+          this.errorMessage = error["error"].message
       })
   }
 
   ngOnDestroy() {
-    //remove the login-page class to the body
     this.body.classList.remove(this.bodyClasses);
   }
 

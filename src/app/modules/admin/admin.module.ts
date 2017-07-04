@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { FileUploadModule } from 'ng2-file-upload'
- 
+import { ToastModule, ToastOptions, Toast } from 'ng2-toastr/ng2-toastr' 
 
 //Custom created components
 import { AdminComponent } from './admin.component';
@@ -41,8 +42,8 @@ import { JQ_TOKEN } from './providers/jquery/jquery.service';
 import { UserService } from './providers/user/user.service';
 
 //toastr service
-import { TOASTR_TOKEN, Toastr } from './providers/toastr/toastr.service'
-declare let toastr: Toastr;
+import { CustomOption } from './providers/toastr/toastr.service'
+declare let toastr: Toast
 
 //Products Services
 import { ProductService } from './providers/product/product.service';
@@ -53,7 +54,9 @@ import { ProductService } from './providers/product/product.service';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
+    ToastModule.forRoot(),
+    BrowserAnimationsModule
   ],
   declarations: [
     AdminComponent, 
@@ -79,7 +82,7 @@ import { ProductService } from './providers/product/product.service';
   providers:[
     UserService,
     ProductService,
-    { provide: TOASTR_TOKEN , useValue: toastr},
+    { provide: ToastOptions, useClass: CustomOption },
     { provide: JQ_TOKEN , useValue: jQuery}
   ],
   exports: [AdminComponent]

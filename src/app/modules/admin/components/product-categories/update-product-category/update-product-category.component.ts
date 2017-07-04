@@ -1,10 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
+import { Component, OnInit, Inject, ViewContainerRef} from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router, ActivatedRoute, Params } from '@angular/router'
+import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr';
 
 import { ProductService } from '../../../providers/product/product.service'
 import { IProductCategory } from '../../../interfaces/product.model'
-import { TOASTR_TOKEN, Toastr } from '../../../providers/toastr/toastr.service'
 
 @Component({
   selector: 'app-update-product-category',
@@ -17,9 +17,9 @@ export class UpdateProductCategoryComponent implements OnInit {
     private router: Router,
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-    private fb : FormBuilder,
-    @Inject(TOASTR_TOKEN) private toastr: Toastr
-  ) { }
+    private toastr: ToastsManager
+  ) {
+  }
   
   userToken: string = JSON.parse(localStorage.getItem('currentUser'));
   productCategory: any
@@ -71,9 +71,18 @@ export class UpdateProductCategoryComponent implements OnInit {
       category_description: formValues.category_description,
       category_isactive: true
     }
-    this.productService.updateProductCategory(productCategoryDetails).subscribe(()=>{
-      this.toastr.success('Product category is updated succesfully')
-      this.router.navigate(['/admin/getproductcategories'])
+    this.productService.updateProductCategory(productCategoryDetails).subscribe(
+      (response)=>{
+      this.toastr.success('Product category is updated!', 'Success!', {dismiss: 'auto'})
+        .then((toast: Toast) => {
+            setTimeout(() => {
+                this.router.navigate(['/admin/getproductcategories']);
+            }, 500);
+        });
+    },
+    (error : Error) => {
+      this.toastr.error(error['error'].statusCode, 'Error!')
+      throw error
     })
   }
 

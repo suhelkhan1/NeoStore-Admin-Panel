@@ -10,13 +10,9 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser) {
             // logged in so return true
-            return true;
-            /*this.authService.getUserDetails(currentUser).subscribe(response => {
-                console.log('Auth Gaurd', response);
-                if(response){
-                    return true
-                }
-            })*/
+            //if(this.authService.ifLoggedIn()){
+                return true
+            //}
         }
 
         // not logged in so redirect to login page with the return url

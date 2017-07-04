@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject, ElementRef, Input } from '@angular/core';
 import { Router } from '@angular/router'
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
-import { TOASTR_TOKEN, Toastr } from '../../../providers/toastr/toastr.service'
 import { ProductService } from '../../../providers/product/product.service'
 import { IProductCategory } from '../../../interfaces/product.model'
 
@@ -15,7 +15,7 @@ export class GetProductCategoriesComponent implements OnInit {
 
   constructor(
     @Inject(JQ_TOKEN) private $ : any,
-    @Inject(TOASTR_TOKEN) private toastr: Toastr,
+    private toastr : ToastsManager,
     public elementRef: ElementRef,
     private productService : ProductService,
     private route : Router 

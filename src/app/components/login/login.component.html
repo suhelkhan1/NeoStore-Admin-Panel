@@ -17,7 +17,7 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         <em class="text-danger" *ngIf="password.invalid && password.dirty">Password length <15</em>
         <div *ngIf="loginInvalid">
-          <p class="text-danger">Invalid credentials</p>
+          <p class="text-danger">{{errorMessage}}</p>
         </div>
       </div>
       <div class="row">
