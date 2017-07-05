@@ -14,7 +14,7 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form #addProductForm="ngForm" (ngSubmit)="addUser(addProductForm.value)" novalidate>
+          <form [formGroup]="addProductForm" (ngSubmit)="addProduct(addProductForm.value)" novalidate>
             <div class="box-body">
               <div class="row">
                 <div class="col-md-4">
@@ -22,11 +22,12 @@
                     <label for="productCategory">Product Category</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-sitemap"></i></span>
-                      <select name="productCategory" class="form-control" required>
-                        <option value="select">Select</option>
-                        <option value="">Categories</option>                        
+                      <select name="productCategory" formControlName="productCategory" ngControl="productCategory" class="form-control" [ngClass]="{ 'error' : productCategory.invalid && productCategory.dirty }">
+                        <option [selected]="productCategory.value == null"  value="" >Select</option>
+                        <option [selected]="productCategory.value == category" value="category">Categories</option>                        
                       </select>
                     </div>
+                    <em class="text-danger" *ngIf="productCategory.invalid && productCategory.dirty">Please Select Product Category</em>
                   </div>
                 </div>
               </div>
@@ -37,8 +38,9 @@
                     <label for="productName">Product Name</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-th-large"></i></span>
-                      <input type="text" class="form-control" (ngModel)="productName" name="productName" placeholder="Enter Product Name" required>
+                      <input type="text" class="form-control" formControlName="productName" [ngClass]="{ 'error' : productName.invalid && productName.dirty }" name="productName" placeholder="Enter Product Name">
                     </div>
+                    <em class="text-danger" *ngIf="productName.invalid && productName.dirty">Please Enter Product Name</em>
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -46,8 +48,9 @@
                     <label for="producer">Manufacturer</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-industry"></i></span>
-                      <input type="text" class="form-control" (ngModel)="producer" name="producer" placeholder="Enter Manufacturer Name" required>
+                      <input type="text" class="form-control" formControlName="producer" [ngClass]="{ 'error' : producer.invalid && producer.dirty }" name="producer" placeholder="Enter Manufacturer Name">
                     </div>
+                    <em class="text-danger" *ngIf="producer.invalid && producer.dirty">Please Enter Manufacturer</em>
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -55,8 +58,9 @@
                     <label for="description">Desription</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-paragraph"></i></span>
-                      <textarea type="text" class="form-control" (ngModel)="description" name="description" placeholder="Enter Description" required></textarea>
+                      <textarea type="text" class="form-control" formControlName="description" [ngClass]="{ 'error' : description.invalid && description.dirty }" name="description" placeholder="Enter Description"></textarea>
                     </div>
+                    <em class="text-danger" *ngIf="description.invalid && description.dirty">Please Enter Desription</em>
                   </div>
                 </div>
               </div>
@@ -69,8 +73,9 @@
                     <label for="cost">Cost</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-inr"></i></span>
-                      <input type="number" class="form-control" (ngModel)="cost" name="cost" placeholder="Cost" required>
+                      <input type="number" class="form-control" formControlName="cost" [ngClass]="{ 'error' : cost.invalid && cost.dirty }" name="cost" placeholder="Cost">
                     </div>
+                    <em class="text-danger" *ngIf="cost.invalid && cost.dirty">Please Enter Cost</em>
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -78,8 +83,9 @@
                     <label for="stockin">Stock in</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-shopping-basket"></i></span>
-                      <input type="password" class="form-control" (ngModel)="stockin" name="stockin" placeholder="Enter Stock" required>
+                      <input type="password" class="form-control" formControlName="stockin" [ngClass]="{ 'error' : stockin.invalid && stockin.dirty }" name="stockin" placeholder="Enter Stock">
                     </div>
+                    <em class="text-danger" *ngIf="stockin.invalid && stockin.dirty">Please Enter Stock</em>
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -87,8 +93,9 @@
                     <label for="colour">Colour</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-paint-brush"></i></span>
-                      <input type="color" class="form-control" (ngModel)="colour" name="colour" required>
+                      <input type="color" class="form-control" formControlName="colour" [ngClass]="{ 'error' : colour.invalid && colour.dirty }" name="colour">
                     </div>
+                    <em class="text-danger" *ngIf="colour.invalid && colour.dirty">Please Select Colour</em>
                   </div>
                 </div>
               </div>
@@ -98,8 +105,9 @@
                     <label for="dimension">Dimension</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                      <input type="tel" class="form-control" (ngModel)="dimension" name="dimension" placeholder="Enter Dimension" required>
+                      <input type="tel" class="form-control" formControlName="dimension" [ngClass]="{ 'error' : dimension.invalid && dimension.dirty }" name="dimension" placeholder="Enter Dimension">
                     </div>
+                    <em class="text-danger" *ngIf="dimension.invalid && dimension.dirty">Please Enter Dimension</em>
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -107,15 +115,16 @@
                     <label for="material">Material</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-cubes"></i></span>
-                      <input type="text" class="form-control" (ngModel)="material" name="material" placeholder="Enter Material" required>
+                      <input type="text" class="form-control" formControlName="material" [ngClass]="{ 'error' : material.invalid && material.dirty }" name="material" placeholder="Enter Material">
                     </div>
                   </div>
+                  <em class="text-danger" *ngIf="material.invalid && material.dirty">Please Enter Material</em>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label for="fileUpload">Upload File</label>
+                    <label for="fileUpload">Upload File</label>                    
                     <app-file-upload></app-file-upload>
                   </div>
                 </div>

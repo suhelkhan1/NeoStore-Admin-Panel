@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { FileUploadModule } from 'ng2-file-upload'
 import { ToastModule, ToastOptions, Toast } from 'ng2-toastr/ng2-toastr' 
 
 //Custom created components
@@ -54,7 +53,6 @@ import { ProductService } from './providers/product/product.service';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    FileUploadModule,
     ToastModule.forRoot(),
     BrowserAnimationsModule
   ],

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
 import { ToastsManager } from 'ng2-toastr'
 
 import { UserService } from '../../../providers/user/user.service'
 import { IUser } from '../../../interfaces/user.model'
+import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
 
 @Component({
   selector: 'app-add-user',
@@ -14,12 +16,13 @@ export class AddUserComponent implements OnInit {
 
   bodyClasses:string = "add-user-page";
   body = document.getElementsByTagName('body')[0];
-  icheck: JQuery;
 
   constructor(
     private userService: UserService,
-    private toastr: ToastsManager
-  ) { }
+    private toastr: ToastsManager,
+    private router: Router,
+    @Inject(JQ_TOKEN) private $: any
+  ) {}
 
   addUserForm: FormGroup
   private userRoles: FormControl
@@ -31,19 +34,25 @@ export class AddUserComponent implements OnInit {
   private gender: FormControl
   private phoneNumber: FormControl
   private dateOfBirth: FormControl
+  private username: FormControl
 
 
   ngOnInit() {
     this.body.classList.add(this.bodyClasses);
-    this.icheck = jQuery("input").iCheck({
-      checkboxClass: "icheckbox_square-blue",
-      radioClass: "iradio_square-blue",
-      increaseArea: "20%" // optional
-    });
-    jQuery('input[name="gender"]').on('ifChecked', (event)=>{
-      this.gender = jQuery(this).val();
-      console.log(jQuery(this).val())
+
+    this.$(document).ready( ()=>{
+      this.$('input').iCheck({
+        checkboxClass: "icheckbox_square-blue",
+        radioClass: "iradio_square-blue",
+        increaseArea: "20%" // optional
+      })
     })
+
+    this.$('input').on('ifChanged', (event)=>{
+      this.gender.setValue(event.currentTarget.value) 
+      //console.log(this.gender)
+    })
+
 
     this.userRoles = new FormControl('', [Validators.required])
     this.firstName = new FormControl('', [Validators.required])
@@ -54,6 +63,7 @@ export class AddUserComponent implements OnInit {
     this.gender = new FormControl('', [Validators.required])
     this.phoneNumber = new FormControl('', [Validators.required])
     this.dateOfBirth = new FormControl('', [Validators.required])
+    this.username = new FormControl('', [Validators.required])
 
     this.addUserForm = new FormGroup ({
       firstName: this.firstName,
@@ -64,12 +74,36 @@ export class AddUserComponent implements OnInit {
       phoneNumber: this.phoneNumber,
       dateOfBirth: this.dateOfBirth,
       password: this.password,
-      confirmPassword: this.confirmPassword
+      confirmPassword: this.confirmPassword,
+      username: this.username
     })
   }
 
   addUser(formValues){
-    console.log(formValues)
+    let userInfo = {
+      first_name: formValues.firstName ,
+      last_name: formValues.lastName ,
+      email: formValues.email,
+      role: formValues.userRoles,
+      gender: formValues.gender,
+      phone_no: formValues.phoneNumber,
+      birth_date: formValues.dateOfBirth,
+      is_active: true,
+      username: formValues.username,
+      password: formValues.password
+    }
+    console.log(userInfo)
+    this.userService.addUser(userInfo).subscribe(
+      (response: IUser) => {
+        this.toastr.success('User added', 'Success!')
+        this.router.navigate(['/admin/getuser'])
+        return response
+      },
+      (error: Error) => {
+        this.toastr.error(error.message, 'Error!')
+        return error
+      }
+    )
   }
 
   ngOnDestroy() {

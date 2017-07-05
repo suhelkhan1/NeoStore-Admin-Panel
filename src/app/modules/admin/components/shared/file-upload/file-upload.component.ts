@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FileUploader } from 'ng2-file-upload';
+import { Component, OnInit, Inject } from '@angular/core';
 
-// const URL = '/api/';
+import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
 const URL = '/api/';
 
 @Component({
@@ -12,12 +11,27 @@ const URL = '/api/';
 
 export class FileUploadComponent implements OnInit {
 
-  public uploader:FileUploader = new FileUploader({url: URL});
+  input: any
+  label: any
+  numFiles: any
+  element: any
 
-  constructor() { }
-  //uploadFiles: any
+  constructor(
+    @Inject(JQ_TOKEN) private $:any
+  ) {}
 
   ngOnInit() {
+
+    this.$('#fileUpload').on('change', (event) => {
+      this.input = event
+      this.numFiles = event.currentTarget.files.length
+      this.label = this.input.currentTarget.value.replace(/^.*[\\\/]/, '');
+      if(this.numFiles > 1 && this.numFiles !== 0){
+        this.$('#uploadFiles').val(this.numFiles + ' files')
+      } else {
+        this.$('#uploadFiles').val(this.label)
+      }
+    })
   }
 
 }
