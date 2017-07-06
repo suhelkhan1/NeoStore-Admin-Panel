@@ -19,21 +19,21 @@
 
               <div class="row">
                 <div class="col-md-4">
-                  <div class="form-group" [ngClass]="{ 'error' : category_name.invalid && category_name.dirty }">
+                  <div class="form-group">
                     <label for="category_name">Category Name</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-sitemap"></i></span>
-                      <input type="text" class="form-control" formControlName="category_name" id="category_name" placeholder="Enter Category Name">
+                      <input type="text" class="form-control" formControlName="category_name" [ngClass]="{ 'error' : category_name.invalid && category_name.dirty }" id="category_name" placeholder="Enter Category Name">
                     </div>
                     <em class="text-danger" *ngIf="category_name.invalid && category_name.dirty">Maximum 20 caracter allowed</em>
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="form-group" [ngClass]="{ 'error' : category_description.invalid && category_description.dirty }">
+                  <div class="form-group">
                     <label for="category_description">Category Description</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-paragraph"></i></span>
-                      <textarea type="text" class="form-control" formControlName="category_description" id="category_description" placeholder="Enter Description"></textarea>
+                      <textarea type="text" class="form-control" formControlName="category_description" [ngClass]="{ 'error' : category_description.invalid && category_description.dirty }" id="category_description" placeholder="Enter Description"></textarea>
                     </div>
                     <em class="text-danger" *ngIf="category_description.invalid && category_description.dirty">Minimum 10 caracter allowed</em>
                   </div>

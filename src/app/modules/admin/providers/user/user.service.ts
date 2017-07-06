@@ -45,6 +45,14 @@ export class UserService {
     })
   }
 
+  updateUser(userInfo): Observable<IUser>{
+    this.current_user_accesToken = JSON.parse(localStorage.getItem('currentUser'))    
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.put(this.url +'/'+ userInfo.id +'?access_token='+ this.current_user_accesToken, JSON.stringify(userInfo), options).map( (response: Response) => {
+      return <IUser>response.json()
+    })
+  }
   handleError(error: Response) { 
     return Observable.throw(error.json());
   }

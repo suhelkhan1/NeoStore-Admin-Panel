@@ -39,7 +39,6 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit() {
     this.body.classList.add(this.bodyClasses);
-
     this.$(document).ready( ()=>{
       this.$('input').iCheck({
         checkboxClass: "icheckbox_square-blue",
@@ -96,7 +95,7 @@ export class AddUserComponent implements OnInit {
     this.userService.addUser(userInfo).subscribe(
       (response: IUser) => {
         this.toastr.success('User added', 'Success!')
-        this.router.navigate(['/admin/getuser'])
+        this.router.navigate(['/admin/getusers'])
         return response
       },
       (error: Error) => {

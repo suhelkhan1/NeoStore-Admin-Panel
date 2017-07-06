@@ -9,5 +9,6 @@ export interface IUser {
     password: string,
     phone_no: number,
     birth_date: Date,
-    role: string
+    role: string,
+    username: string
 }

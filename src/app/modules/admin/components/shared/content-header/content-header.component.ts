@@ -14,7 +14,7 @@ export class ContentHeaderComponent {
         private actRoute: ActivatedRoute
     ) {}
     
-    title: string = this.actRoute.snapshot.url.toString().toLocaleUpperCase()
+    title: string = this.actRoute.snapshot.data["breadcrumb"]
     routeUrls: any;
     
     ngOnInit() {

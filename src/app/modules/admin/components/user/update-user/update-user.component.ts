@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Component, OnInit, ElementRef, Inject } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { Router, ActivatedRoute, Params } from '@angular/router'
+import { ToastsManager } from 'ng2-toastr'
 
 import { UserService } from '../../../providers/user/user.service'
-
+import { IUser } from '../../../interfaces/user.model'
+import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
 
 @Component({
   selector: 'app-update-user',
@@ -14,53 +16,122 @@ export class UpdateUserComponent implements OnInit {
 
   bodyClasses:string = "update-user-page";
   body = document.getElementsByTagName('body')[0];
-  icheck: JQuery;
+
   constructor(
-    private userService : UserService,
-    private route: ActivatedRoute
-  ) { }
-  user: any
+    private userService: UserService,
+    private toastr: ToastsManager,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    @Inject(JQ_TOKEN) private $: any
+  ) {}
+
+  user: IUser
+
   updateUserForm: FormGroup
-  private id: FormControl
-  private first_name: FormControl
-  private last_name: FormControl
+  private userRoles: FormControl
+  private firstName: FormControl
+  private lastName: FormControl
   private email: FormControl
-  private phone_no: FormControl
-  private birth_date: FormControl
+  private gender: FormControl
+  private phoneNumber: FormControl
+  private dateOfBirth: FormControl
+  private username: FormControl
 
   ngOnInit() {
     this.body.classList.add(this.bodyClasses);   //add the class   
-
-    this.icheck = jQuery("input").iCheck({
-      checkboxClass: "icheckbox_square-blue",
-      radioClass: "iradio_square-blue",
-      increaseArea: "20%" // optional
-    });
-
-    this.route.params.subscribe( (params: Params) => {
-      this.userService.getUser(params['id']).subscribe( (response) =>{
-        this.user = response
-        this.updateUserValidation(this.user)
+    this.$(document).ready( ()=>{
+      this.$('input').iCheck({
+        checkboxClass: "icheckbox_square-blue",
+        radioClass: "iradio_square-blue",
+        increaseArea: "20%" // optional
       })
+    })
+    this.$('input').on('change', (event)=>{
+      this.gender.setValue(event.currentTarget.value) 
+      //console.log(this.gender)
+    })
+
+    this.firstName = new FormControl('', [Validators.required])
+    this.lastName = new FormControl('', [Validators.required])
+    this.email = new FormControl('', [Validators.required])
+    this.userRoles = new FormControl('', [Validators.required])
+    this.gender = new FormControl('', [Validators.required])
+    this.phoneNumber = new FormControl('', [Validators.required])
+    this.dateOfBirth = new FormControl('', [Validators.required])
+    this.username = new FormControl('', [Validators.required])
+
+    this.updateUserForm = new FormGroup ({
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      userRoles: this.userRoles,
+      gender: this.gender,
+      phoneNumber: this.phoneNumber,
+      dateOfBirth: this.dateOfBirth,
+      username: this.username
+    })
+
+    this.activatedRoute.params.subscribe( (params: Params) => {
+      let id = params['id'];
+      this.getUser(id)  
     })
   }
 
-  updateUserValidation(user){
-    this.id = new FormControl(this.user.id, [Validators.required, Validators.minLength(20)])
-    this.first_name = new FormControl(this.user.first_name, [Validators.required, Validators.maxLength(20)])
-    this.last_name = new FormControl(this.user.last_name, [Validators.required, Validators.maxLength(20)])
-    this.email = new FormControl(this.user.email, [Validators.required, Validators.email])
-    this.phone_no = new FormControl(this.user.phone_no , [Validators.required, Validators.maxLength(12)])
-    this.birth_date = new FormControl(this.user.birth_date,Validators.required)
+  getUser(id){
+    this.userService.getUser(id).subscribe(
+      (response: IUser) => {
+        this.populateUserForm(response)
+        return response
+      },
+      (error: Error) => {
+        this.toastr.error(error.message, 'Error!')
+        return error
+      }
+    )
+  }
+  populateUserForm(user: IUser){
+    if (this.updateUserForm) {
+        this.updateUserForm.reset();
+    }
 
-    this.updateUserForm = new FormGroup ({
-      id: this.id,
-      first_name: this.first_name,
-      last_name: this.last_name,
-      email: this.email,
-      phone_no: this.phone_no,
-      birth_date: this.birth_date
+    this.user = user
+
+    this.updateUserForm.patchValue({
+      firstName: this.user.first_name,
+      lastName: this.user.last_name,
+      email: this.user.email,
+      userRoles: this.user.role,
+      gender: this.user.gender,
+      phoneNumber: this.user.phone_no,
+      dateOfBirth: new Date(this.user.birth_date).toLocaleDateString(),
+      username: this.user.username
     })
+  }
+  updateUser(formValues){
+    let userInfo = {
+      id: this.user.user_id,
+      first_name: formValues.firstName ,
+      last_name: formValues.lastName ,
+      email: formValues.email,
+      role: formValues.userRoles,
+      gender: formValues.gender,
+      phone_no: formValues.phoneNumber,
+      birth_date: formValues.dateOfBirth,
+      is_active: true,
+      username: formValues.username
+    }
+    console.log(userInfo)
+    this.userService.updateUser(userInfo).subscribe(
+      (response: IUser) => {
+        this.toastr.success('User Updated', 'Success!')
+        this.router.navigate(['/admin/getuser'])
+        return response
+      },
+      (error: Error) => {
+        this.toastr.error(error.message, 'Error!')
+        return error
+      }
+    )
   }
 
   ngOnDestroy() {

@@ -10,11 +10,11 @@
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">Add Product</h3>
+            <h3 class="box-title">Update Product</h3>
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form [formGroup]="addProductForm" (ngSubmit)="addProduct(addProductForm.value)" novalidate>
+          <form [formGroup]="updateProductForm" (ngSubmit)="updateProduct(updateProductForm.value)" novalidate>
             <div class="box-body">
               <div class="row">
                 <div class="col-md-4">
@@ -24,7 +24,7 @@
                       <span class="input-group-addon"><i class="fa fa-sitemap"></i></span>
                       <select name="productCategory" formControlName="productCategory" ngControl="productCategory" class="form-control" [ngClass]="{ 'error' : productCategory.invalid && productCategory.dirty }">
                         <option [selected]="productCategory.value == null"  value="" >Select</option>
-                        <option *ngFor="let productCategory of productCategories" [value]="productCategory.id">{{productCategory.category_name}}</option>                        
+                        <option [selected]="productCategory.value == category" value="category">Categories</option>                        
                       </select>
                     </div>
                     <em class="text-danger" *ngIf="productCategory.invalid && productCategory.dirty">Please Select Product Category</em>
@@ -87,7 +87,7 @@
                     <label for="stockin">Stock in</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-shopping-basket"></i></span>
-                      <input type="number" class="form-control" formControlName="stockin" [ngClass]="{ 'error' : stockin.invalid && stockin.dirty }"
+                      <input type="password" class="form-control" formControlName="stockin" [ngClass]="{ 'error' : stockin.invalid && stockin.dirty }"
                         name="stockin" placeholder="Enter Stock">
                     </div>
                     <em class="text-danger" *ngIf="stockin.invalid && stockin.dirty">Please Enter Stock</em>
@@ -140,11 +140,12 @@
                   </div>
                 </div>
               </div>
+              
             </div>
             <!-- /.box-body -->
 
             <div class="box-footer">
-              <button type="submit" [disabled]="addProductForm.invalid" class="btn btn-primary">Save</button>
+              <button type="submit" [disabled]="updateProductForm.invalid" class="btn btn-primary">Save</button>
             </div>
           </form>
         </div>

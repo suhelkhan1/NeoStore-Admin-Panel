@@ -1,4 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
 const URL = '/api/';
@@ -19,6 +20,10 @@ export class FileUploadComponent implements OnInit {
   constructor(
     @Inject(JQ_TOKEN) private $:any
   ) {}
+  
+  /*fileUploadForm: FormGroup
+  private fileUpload: FormControl*/
+  fileUpload:any
 
   ngOnInit() {
 
@@ -26,12 +31,31 @@ export class FileUploadComponent implements OnInit {
       this.input = event
       this.numFiles = event.currentTarget.files.length
       this.label = this.input.currentTarget.value.replace(/^.*[\\\/]/, '');
-      if(this.numFiles > 1 && this.numFiles !== 0){
+      if(this.numFiles === 0){
+        this.$('#uploadFiles').val(' No file choosen')
+      } else if(this.numFiles > 1 && this.numFiles !== 0){
         this.$('#uploadFiles').val(this.numFiles + ' files')
       } else {
         this.$('#uploadFiles').val(this.label)
       }
     })
+
+    /*this.fileUpload = new FormControl('', [
+      Validators.required
+    ])
+
+    this.fileUploadForm = new FormGroup ({
+      fileUpload: this.fileUpload,
+    })*/
+  }
+
+  uploadFiles(formValues){
+    console.log(formValues)
+  }
+
+  onChange(event) {
+    var files = event.srcElement.files;
+    console.log(files);
   }
 
 }

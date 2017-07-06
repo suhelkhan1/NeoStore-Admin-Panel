@@ -1,8 +1,28 @@
-<div class="input-group">
-  <label class="input-group-btn">
-    <span class="btn btn-primary">
-      Browse&hellip; <input type="file" id="fileUpload" style="display: none;" multiple>
-    </span>
-  </label>
-  <input type="text" id="uploadFiles" class="form-control" readonly>
-</div>
+<!--<form [formGroup]="fileUploadForm" (ngSubmit)="uploadFiles(fileUploadForm.value)">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="input-group">
+      <label class="input-group-btn">
+        <span class="btn btn-primary">
+          Browse&hellip; 
+          <input type="file" id="fileUpload" formControlName="fileUpload" [ngClass]="{ 'error' : fileUpload.invalid && fileUpload.dirty }" style="display: none;" multiple>
+        </span>
+      </label>
+      <input type="text"  id="uploadFiles" class="form-control" readonly>
+      <em class="text-danger" *ngIf="fileUpload.invalid && fileUpload.dirty">Please Upload File</em>
+    </div>
+    </div>
+    <div class="panel-footer">
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </div>
+  </div>
+</form>-->
+
+
+
+<form #fileUploadForm="ngForm" (ngSubmit)="uploadFiles(fileUploadForm.value)">
+  <input type="file" [(ngModel)]="fileUpload" name="fileUpload" (change)="onChange($event)"
+  [ngClass]="{ 'error' : fileUploadForm.controls.fileUpload?.invalid && fileUploadForm.controls.fileUpload?.dirty }">
+  <em class="text-danger" *ngIf="fileUploadForm.controls.fileUpload?.invalid && fileUploadForm.controls.fileUpload?.dirty">Please Upload File</em>
+  <button type="submit" class="btn btn-primary">Upload</button>
+</form>

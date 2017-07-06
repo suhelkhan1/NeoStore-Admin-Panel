@@ -19,17 +19,38 @@ export class ProductService {
       return <IProduct>response.json()
     }).catch(this.handleError)
   }
-
-  addProductCategory(productCategoryDetails): Observable<IProductCategory>{
+  getProduct(productId): Observable<IProduct>{
+    return this.http.get(this.url + '/products/'+ productId +'?access_token=' + this.accessToken).map( (response: Response) => {
+      return <IProduct>response.json()
+    }).catch(this.handleError)
+  }
+  addProduct(productDetails): Observable<IProduct>{
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
-    return this.http.post(this.url + '/categories?access_token=' + this.accessToken, JSON.stringify(productCategoryDetails), options).map( (response: Response) => {
+    return this.http.post(this.url + '/products?access_token=' + this.accessToken ,JSON.stringify(productDetails), options).map( (response: Response)=>{
+      return <IProduct>response.json()
+    }).catch(this.handleError)
+  }
+
+  updateProduct(productDetails): Observable<IProduct>{
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.put(this.url + '/products/' + productDetails.id + '?access_token=' + this.accessToken, JSON.stringify(productDetails), options).map( (response: Response) => {
       return <IProductCategory>response.json()
     }).catch(this.handleError)
   }
 
   //Product Category CRUD API calls
+  addProductCategory(productCategoryDetails): Observable<IProductCategory>{
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.post(this.url + '/categories?access_tokeen=' + this.accessToken, JSON.stringify(productCategoryDetails), options).map( (response: Response) => {
+      return <IProductCategory>response.json()
+    }).catch(this.handleError)
+  }
   getProductCategories(): Observable<IProductCategory>{
     return this.http.get(this.url + '/categories?access_token=' + this.accessToken).map( (response:Response) => {
       return <IProductCategory>response.json()

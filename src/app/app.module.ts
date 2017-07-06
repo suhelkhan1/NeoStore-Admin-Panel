@@ -19,7 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './providers/auth/auth.service'
 
 //Route Gaurds
-import { AuthGuard } from './gaurds/auth.guard'
+import { AuthGuard } from './gaurds/auth.guard';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component'
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { AuthGuard } from './gaurds/auth.guard'
   ],
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ForgetPasswordComponent
   ],
   providers: [
     AuthService,

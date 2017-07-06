@@ -1,0 +1,81 @@
+<div class="content-wrapper">
+  <!--content header-->
+  <app-content-header></app-content-header>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="box box-primary" *ngIf="product">
+          <div class="box-header with-border">
+            <h3 class="box-title">View Product</h3>
+          </div>
+          <!-- /.box-header -->
+
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Product Name</label>
+                <p>{{product.product_name}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Product Category </label>
+                <p>{{product.categoryId}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Manufacturer </label>
+                <p>{{product.product_producer}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Description</label>
+                <p>{{product.product_description}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Cost</label>
+                <p>{{product.product_cost}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Stock left</label>
+                <p>{{product.product_stock}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Colour</label>
+                <p>{{product.product_color}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Dimension</label>
+                <p>{{product.product_dimension}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Material</label>
+                <p>{{product.product_material}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="box-footer">
+            <button type="button" [routerLink]="['/admin/getproducts']" class="btn btn-primary">Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /.box -->
+</div>
