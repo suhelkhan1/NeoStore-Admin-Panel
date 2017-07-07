@@ -53,7 +53,12 @@ export class UpdateUserComponent implements OnInit {
 
     this.firstName = new FormControl('', [Validators.required])
     this.lastName = new FormControl('', [Validators.required])
-    this.email = new FormControl('', [Validators.required])
+    this.email = new FormControl({
+      value:'', 
+      disabled: true
+    }, [
+      Validators.required
+    ])
     this.userRoles = new FormControl('', [Validators.required])
     this.gender = new FormControl('', [Validators.required])
     this.phoneNumber = new FormControl('', [Validators.required])
@@ -103,13 +108,13 @@ export class UpdateUserComponent implements OnInit {
       userRoles: this.user.role,
       gender: this.user.gender,
       phoneNumber: this.user.phone_no,
-      dateOfBirth: new Date(this.user.birth_date).toLocaleDateString(),
+      dateOfBirth: new Date(this.user.birth_date).toISOString().split('T')[0],
       username: this.user.username
     })
   }
   updateUser(formValues){
     let userInfo = {
-      id: this.user.user_id,
+      id: this.user.id,
       first_name: formValues.firstName ,
       last_name: formValues.lastName ,
       email: formValues.email,

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-
+import { AgmCoreModule } from '@agm/core';
 //3rd party modules
 import { ToastModule, ToastOptions, Toast } from 'ng2-toastr/ng2-toastr' 
 import { jqxFileUploadComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxfileupload';
@@ -51,6 +51,9 @@ import { GetOrdersComponent } from './components/orders/get-orders/get-orders.co
 import { GetOrderComponent } from './components/orders/get-order/get-order.component';
 import { UpdateOrderComponent } from './components/orders/update-order/update-order.component';
 
+//Location component used by Angular Google Map Api
+import { LocationComponent } from './components/location/location.component';
+
 //Tokens
 import { JQ_TOKEN } from './providers/jquery/jquery.service';
 
@@ -71,7 +74,10 @@ import { ProductService } from './providers/product/product.service';
     FormsModule,
     ReactiveFormsModule,
     ToastModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDIc9JPEx_28T-43HG6bK-CtB7Z2KmaY9o'
+    })
   ],
   declarations: [
     AdminComponent, 
@@ -97,7 +103,8 @@ import { ProductService } from './providers/product/product.service';
     GetOrdersComponent,
     GetOrderComponent,
     UpdateOrderComponent,
-    GetUsersComponent
+    GetUsersComponent,
+    LocationComponent
   ],
   providers:[
     UserService,

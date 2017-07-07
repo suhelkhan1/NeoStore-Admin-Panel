@@ -34,6 +34,10 @@ export class MainHeaderComponent implements OnInit {
     )
   }
 
+  profileClickListner(){
+    this.router.navigate(['/admin/updateuser/', this.userProfile.id])
+  }
+
   logout(){
     this.authService.logout().subscribe(
       (response) => {

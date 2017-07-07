@@ -28,7 +28,6 @@ export class AuthService {
       }
     }).catch(this.handleError)
   }
-  
 
   logout() {
     this.accessToken = JSON.parse(localStorage.getItem('currentUser'))

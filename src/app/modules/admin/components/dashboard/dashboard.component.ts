@@ -14,7 +14,6 @@ export class DashboardComponent implements OnInit {
   knob: JQuery;
   calendar: JQuery;
 
-
   ngAfterViewInit(){
 
   }

@@ -1,3 +1,47 @@
-<p>
-  get-orders works!
-</p>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <app-content-header></app-content-header>
+
+  <section class="content">
+    <div class="row">
+      <div class="col-xs-12">
+        <!-- /.box-header -->
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Orders List</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <table id="productCategoryTable" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Id</th>                
+                  <th>Created date</th>
+                  <th>Product Id</th>
+                  <th>User Id</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor=" let order of orders">
+                  <td>{{order.id}}</td>
+                  <td>{{order.category_name}}</td>
+                  <td>{{order.category_description}}</td>                  
+                  <td>{{order.category_isactive}}</td>                  
+                  <th class="text-center">
+                    <div class="btn btn-group no-padding">
+                      <button (click)="veiwClickListner(order)"type="button" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></button>
+                      <button (click)="editClickListner(order)" type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></button>
+                      <button (click)="deleteorder(order)" type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+                    </div>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>

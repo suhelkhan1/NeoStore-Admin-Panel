@@ -14,8 +14,8 @@ export class GetProductComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private productService: ProductService,
-    private toastr: ToastsManager
+    private toastr: ToastsManager,
+    private productService: ProductService
   ) { }
 
   product: IProduct

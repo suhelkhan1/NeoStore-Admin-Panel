@@ -1,0 +1,75 @@
+<div class="content-wrapper">
+  <!--content header-->
+  <app-content-header></app-content-header>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">User info</h3>
+          </div>
+          <!-- /.box-header -->
+
+          <div class="box-body" *ngIf="user">
+            <div class="row">
+              <div class="col-md-6">
+                <label>User Name</label>
+                <p>{{user.username}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>First Name </label>
+                <p>{{user.first_name}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Last Name </label>
+                <p>{{user.last_name}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Email</label>
+                <p>{{user.email}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>User Role</label>
+                <p>{{user.role}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Gender</label>
+                <p>{{user.gender}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Phone Number</label>
+                <p>{{user.phone_no}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Date of Birth</label>
+                <p>{{dateOfBirth}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="box-footer">
+            <button type="button" [routerLink]="['/admin/getusers']" class="btn btn-primary">Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /.box -->
+</div>
