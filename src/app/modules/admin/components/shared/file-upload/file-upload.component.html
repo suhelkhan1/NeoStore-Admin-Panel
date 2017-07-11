@@ -20,9 +20,80 @@
 
 
 
-<form #fileUploadForm="ngForm" (ngSubmit)="uploadFiles(fileUploadForm.value)">
+<!--<form #fileUploadForm="ngForm" (ngSubmit)="uploadFiles(fileUploadForm.value)">
   <input type="file" [(ngModel)]="fileUpload" name="fileUpload" (change)="onChange($event)"
   [ngClass]="{ 'error' : fileUploadForm.controls.fileUpload?.invalid && fileUploadForm.controls.fileUpload?.dirty }">
   <em class="text-danger" *ngIf="fileUploadForm.controls.fileUpload?.invalid && fileUploadForm.controls.fileUpload?.dirty">Please Upload File</em>
   <button type="submit" class="btn btn-primary">Upload</button>
-</form>
+</form>-->
+
+
+<div class="content-wrapper">
+  <!--content header-->
+  <app-content-header></app-content-header>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">User form with file upload</h3>
+          </div>
+          <form [formGroup]="fileUploadForm" (ngSubmit)="fileUploadForm.valid && fileUploadForm.value" novalidate>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" 
+                      formControlName="username" 
+                      [ngClass]="{ 'error' : username.invalid && username.dirty }"
+                      name="username" placeholder="Enter Username">
+                  </div>
+                  <em class="text-danger" *ngIf="username.invalid && username.dirty">Please enter username</em>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="email">email</label>
+                    <input type="email" class="form-control" 
+                      formControlName="email" 
+                      [ngClass]="{ 'error' : email.invalid && email.dirty }" name="email"
+                      placeholder="Enter email">
+                  </div>
+                  <em class="text-danger" *ngIf="email.invalid && email.dirty">Please enter email</em>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="fileUpload">Upload File</label>
+                    <jqxFileUpload  [width]="300" 
+                                    [uploadUrl]="'http://10.0.100.221:3000/api/images/profileData'" 
+                                    [fileInputName]="'fileToUpload'"
+                                    [cancelTemplate]="'danger'" 
+                                    [browseTemplate]="'success'" 
+                                    [uploadTemplate]="'primary'"
+                                    (onSelect)="onSelect($event)"
+                                    (onRemove)="onRemove($event)"
+                                    (onUploadStart)="onUploadStart($event)"
+                                    (onUploadEnd)="onUploadEnd($event)"s>
+                    </jqxFileUpload>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box-footer">
+              <button type="submit" [disabled]="fileUploadForm.invalid" class="btn btn-primary">Save</button>
+              <button type="submit" [routerLink]="['/admin']" class="btn btn-danger">Cancel</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

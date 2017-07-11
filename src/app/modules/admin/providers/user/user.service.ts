@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs'
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 
-import { IUser } from '../../interfaces/user.model'
+import { IUser, IUser2 } from '../../interfaces/user.model'
+import { IImage } from '../../interfaces/image.model'
 
 @Injectable()
 export class UserService {
@@ -49,12 +50,29 @@ export class UserService {
     this.current_user_accesToken = JSON.parse(localStorage.getItem('currentUser'))    
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    return this.http.put(this.url +'/'+ userInfo.id +'?access_token='+ this.current_user_accesToken, JSON.stringify(userInfo), options).map( (response: Response) => {
+    return this.http.patch(this.url +'/'+ userInfo.id +'?access_token='+ this.current_user_accesToken, JSON.stringify(userInfo), options).map( (response: Response) => {
       return <IUser>response.json()
     })
   }
   handleError(error: Response) { 
     return Observable.throw(error.json());
+  }
+
+  //Test for file upload
+  addUser2(userInfo): Observable<IUser2> {   
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post('http://10.0.100.221:3000/people/profileData', JSON.stringify(userInfo), options).map( (response: Response) => {
+      return <IUser2>response.json()
+    })
+  }
+
+  imageUpload(imageInfo): Observable<IImage>{
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post('http://10.0.100.221:3000/api/images/profileData', JSON.stringify(imageInfo), options).map( (response: Response) => {
+      return <IImage>response.json()
+    })
   }
 
 }

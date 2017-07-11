@@ -14,7 +14,7 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form autocomplete="on" [formGroup]="addUserForm" (ngSubmit)="addUser(addUserForm.value)" novalidate>
+          <form autocomplete="on" [formGroup]="addUserForm" (ngSubmit)="addUserForm.valid && addUser(addUserForm.value)" novalidate>
             <div class="box-body">
               <div class="row">
                 <div class="col-md-4">
@@ -39,7 +39,7 @@
                       <input type="text" class="form-control" formControlName="username" [ngClass]="{ 'error' : username.invalid && username.dirty }" placeholder="Enter User Name">
                     </div>
                   </div>
-                  <em class="text-danger" *ngIf="username.invalid && username.dirty">Please proper user name</em>
+                  <em class="text-danger" *ngIf="username.invalid && username.dirty">Please enter proper user name</em>
                 </div>
               </div>
 
@@ -52,7 +52,7 @@
                       <input type="text" class="form-control" formControlName="firstName" [ngClass]="{ 'error' : firstName.invalid && firstName.dirty }" placeholder="Enter First Name">
                     </div>
                   </div>
-                  <em class="text-danger" *ngIf="firstName.invalid && firstName.dirty">Please proper first name</em>
+                  <em class="text-danger" *ngIf="firstName.invalid && firstName.dirty">Please enter proper first name</em>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group" >
@@ -61,7 +61,7 @@
                       <span class="input-group-addon"><i class="fa fa-user"></i></span>
                       <input type="text" class="form-control" formControlName="lastName" [ngClass]="{ 'error' : lastName.invalid && lastName.dirty }" placeholder="Enter Last Name">
                     </div>
-                    <em class="text-danger" *ngIf="lastName.invalid && lastName.dirty">Please proper last name</em>
+                    <em class="text-danger" *ngIf="lastName.invalid && lastName.dirty">Please enter proper last name</em>
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -95,6 +95,7 @@
                       <input type="password" class="form-control" formControlName="confirmPassword" [ngClass]="{ 'error' : confirmPassword.invalid && confirmPassword.dirty }" placeholder="Confirm Password">
                     </div>
                     <em class="text-danger" *ngIf="confirmPassword.invalid && confirmPassword.dirty">Please enter valid password</em>
+                    <em class="text-danger" *ngIf="confirmPasswordEvent()">Password does not matches</em>
                   </div>
                 </div>
                 <div class="col-md-4">

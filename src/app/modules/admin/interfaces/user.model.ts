@@ -12,3 +12,10 @@ export interface IUser {
     role: string,
     username: string
 }
+
+
+export interface IUser2{
+    username: string,
+    email: string,
+    image: string
+}

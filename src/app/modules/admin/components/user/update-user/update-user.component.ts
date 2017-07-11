@@ -46,10 +46,10 @@ export class UpdateUserComponent implements OnInit {
         increaseArea: "20%" // optional
       })
     })
-    this.$('input').on('change', (event)=>{
+    /*this.$('input').on('change', (event)=>{
       this.gender.setValue(event.currentTarget.value) 
       //console.log(this.gender)
-    })
+    })*/
 
     this.firstName = new FormControl('', [Validators.required])
     this.lastName = new FormControl('', [Validators.required])
@@ -129,7 +129,7 @@ export class UpdateUserComponent implements OnInit {
     this.userService.updateUser(userInfo).subscribe(
       (response: IUser) => {
         this.toastr.success('User Updated', 'Success!')
-        this.router.navigate(['/admin/getuser'])
+        this.router.navigate(['/admin/getusers'])
         return response
       },
       (error: Error) => {

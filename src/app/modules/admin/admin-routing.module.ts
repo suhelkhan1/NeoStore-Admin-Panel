@@ -26,6 +26,8 @@ import { GetOrdersComponent } from './components/orders/get-orders/get-orders.co
 import { GetOrderComponent } from './components/orders/get-order/get-order.component';
 import { UpdateOrderComponent } from './components/orders/update-order/update-order.component';
 
+import { FileUploadComponent } from './components/shared/file-upload/file-upload.component'
+
 import { AuthGuard } from '../../gaurds/auth.guard'
 
 @NgModule({
@@ -59,6 +61,8 @@ import { AuthGuard } from '../../gaurds/auth.guard'
             { path:'getorders', component: GetOrdersComponent, data: { breadcrumb : 'List od Orders'} },
             { path:'getorder/:id', component: GetOrderComponent, data: { breadcrumb : 'Order'} },
             { path:'updateorder', component: UpdateOrderComponent, data: { breadcrumb : 'Update Order'} },
+            { path:'uploadfile', component: FileUploadComponent, data: { breadcrumb : 'Upload File'} },
+            
             { path:'404', component: PageNotfoundComponent, data: { breadcrumb : '404'} },
             //{ path:'**', redirectTo:'404', pathMatch:'full'}
           ]

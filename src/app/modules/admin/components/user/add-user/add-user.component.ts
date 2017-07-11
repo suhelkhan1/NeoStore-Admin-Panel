@@ -1,7 +1,8 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { FormGroup, FormControl, Validators, Validator } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ToastsManager } from 'ng2-toastr'
+import { jqxFileUploadComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxfileupload';
 
 import { UserService } from '../../../providers/user/user.service'
 import { IUser } from '../../../interfaces/user.model'
@@ -58,7 +59,9 @@ export class AddUserComponent implements OnInit {
     this.lastName = new FormControl('', [Validators.required])
     this.email = new FormControl('', [Validators.required])
     this.password = new FormControl('', [Validators.required])
-    this.confirmPassword = new FormControl('', [Validators.required])
+    this.confirmPassword = new FormControl('', [
+      Validators.required
+    ])
     this.gender = new FormControl('', [Validators.required])
     this.phoneNumber = new FormControl('', [Validators.required])
     this.dateOfBirth = new FormControl('', [Validators.required])
@@ -76,6 +79,10 @@ export class AddUserComponent implements OnInit {
       confirmPassword: this.confirmPassword,
       username: this.username
     })
+  }
+
+  confirmPasswordEvent(){
+    this.password.value === this.confirmPassword.value ? true : false
   }
 
   addUser(formValues){
@@ -98,9 +105,9 @@ export class AddUserComponent implements OnInit {
         this.router.navigate(['/admin/getusers'])
         return response
       },
-      (error: Error) => {
-        this.toastr.error(error.message, 'Error!')
-        return error
+      (error) => {
+        let er = JSON.parse(error._body)
+        this.toastr.error(er.error.message, 'Error!', {dismiss: 'click'})
       }
     )
   }
