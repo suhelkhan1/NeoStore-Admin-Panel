@@ -12,40 +12,42 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="productsTable" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Product Name</th>
-                  <th>Manufacturer</th>
-                  <th>Product Category</th>
-                  <th>Cost</th>
-                  <th>Stock</th>
-                  <th>Colour</th>
-                  <th>Material</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor=" let product of products">
-                  <td>{{product.id}}</td>
-                  <td>{{product.product_name}}</td>
-                  <td>{{product.product_producer}}</td>
-                  <td>{{product.categoryId}}</td>
-                  <td>{{product.product_cost}}</td>
-                  <td>{{product.product_stock}}</td>
-                  <td>{{product.product_color}}</td>
-                  <td>{{product.product_material}}</td>
-                  <th class="text-center">
-                    <div class="btn btn-group no-padding">
-                      <button (click)="veiwClickListner(product)" type="button" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></button>
-                      <button (click)="editClickListner(product)" type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></button>
-                      <button type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
-                    </div>
-                  </th>
-                </tr>
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table id="productsTable" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Product Name</th>
+                    <th>Manufacturer</th>
+                    <th>Product Category</th>
+                    <th>Cost</th>
+                    <th>Stock</th>
+                    <th>Colour</th>
+                    <th>Material</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor=" let product of products">
+                    <td>{{product.id}}</td>
+                    <td>{{product.product_name}}</td>
+                    <td>{{product.product_producer}}</td>
+                    <td>{{product.categoryId}}</td>
+                    <td>{{product.product_cost}}</td>
+                    <td>{{product.product_stock}}</td>
+                    <td>{{product.product_color}}</td>
+                    <td>{{product.product_material}}</td>
+                    <th class="text-center">
+                      <div class="btn btn-group no-padding">
+                        <button (click)="veiwClickListner(product)" type="button" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></button>
+                        <button (click)="editClickListner(product)" type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></button>
+                        <button type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+                      </div>
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 

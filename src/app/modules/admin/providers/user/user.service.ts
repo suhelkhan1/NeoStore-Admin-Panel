@@ -68,9 +68,11 @@ export class UserService {
   }
 
   imageUpload(imageInfo): Observable<IImage>{
-    let headers = new Headers({ 'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
-    return this.http.post('http://10.0.100.221:3000/api/images/profileData', JSON.stringify(imageInfo), options).map( (response: Response) => {
+   /* let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});*/
+    let formdata = new FormData();
+    formdata.append('file', imageInfo)
+    return this.http.post('http://10.0.100.221:3000/api/images/profileData', formdata).map( (response: Response) => {
       return <IImage>response.json()
     })
   }

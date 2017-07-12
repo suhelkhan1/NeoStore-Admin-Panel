@@ -12,32 +12,34 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="productCategoryTable" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Id</th>                
-                  <th>Category Name</th>
-                  <th>Category Description</th>
-                  <th>Category isActive</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor=" let productCategory of productCategories">
-                  <td>{{productCategory.id}}</td>
-                  <td>{{productCategory.category_name}}</td>
-                  <td>{{productCategory.category_description}}</td>                  
-                  <td>{{productCategory.category_isactive}}</td>                  
-                  <th class="text-center">
-                    <div class="btn btn-group no-padding">
-                      <button (click)="veiwClickListner(productCategory)"type="button" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></button>
-                      <button (click)="editClickListner(productCategory)" type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></button>
-                      <button (click)="deleteProductCategory(productCategory)" type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
-                    </div>
-                  </th>
-                </tr>
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table id="productCategoryTable" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Id</th>                
+                    <th>Category Name</th>
+                    <th>Category Description</th>
+                    <th>Category isActive</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor=" let productCategory of productCategories">
+                    <td>{{productCategory.id}}</td>
+                    <td>{{productCategory.category_name}}</td>
+                    <td>{{productCategory.category_description}}</td>                  
+                    <td>{{productCategory.category_isactive}}</td>                  
+                    <th class="text-center">
+                      <div class="btn btn-group no-padding">
+                        <button (click)="veiwClickListner(productCategory)"type="button" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></button>
+                        <button (click)="editClickListner(productCategory)" type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></button>
+                        <button (click)="deleteProductCategory(productCategory)" type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+                      </div>
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 

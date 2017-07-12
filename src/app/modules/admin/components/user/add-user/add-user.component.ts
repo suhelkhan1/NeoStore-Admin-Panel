@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
-import { FormGroup, FormControl, Validators, Validator } from '@angular/forms'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ToastsManager } from 'ng2-toastr'
 import { jqxFileUploadComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxfileupload';
@@ -7,6 +7,7 @@ import { jqxFileUploadComponent } from 'jqwidgets-framework/jqwidgets-ts/angular
 import { UserService } from '../../../providers/user/user.service'
 import { IUser } from '../../../interfaces/user.model'
 import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
+import { EqualValidatorDirective } from '../../../directives/equal-validator/equal-validator.directive'
 
 @Component({
   selector: 'app-add-user',
@@ -55,17 +56,40 @@ export class AddUserComponent implements OnInit {
 
 
     this.userRoles = new FormControl('', [Validators.required])
-    this.firstName = new FormControl('', [Validators.required])
-    this.lastName = new FormControl('', [Validators.required])
-    this.email = new FormControl('', [Validators.required])
-    this.password = new FormControl('', [Validators.required])
+    this.firstName = new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(24),
+      Validators.pattern('[a-zA-Z][a-zA-Z ]+')
+    ])
+    this.lastName = new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(24),
+      Validators.pattern('[a-zA-Z][a-zA-Z ]+')
+    ])
+    this.email = new FormControl('', [
+      Validators.required,
+      Validators.email
+    ])
+    this.password = new FormControl('', [
+      Validators.required
+    ])
     this.confirmPassword = new FormControl('', [
       Validators.required
     ])
     this.gender = new FormControl('', [Validators.required])
-    this.phoneNumber = new FormControl('', [Validators.required])
+    this.phoneNumber = new FormControl('', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(10)
+    ])
     this.dateOfBirth = new FormControl('', [Validators.required])
-    this.username = new FormControl('', [Validators.required])
+    this.username = new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(24)
+    ])
 
     this.addUserForm = new FormGroup ({
       firstName: this.firstName,
@@ -79,10 +103,6 @@ export class AddUserComponent implements OnInit {
       confirmPassword: this.confirmPassword,
       username: this.username
     })
-  }
-
-  confirmPasswordEvent(){
-    this.password.value === this.confirmPassword.value ? true : false
   }
 
   addUser(formValues){

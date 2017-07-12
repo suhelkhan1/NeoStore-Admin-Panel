@@ -69,9 +69,9 @@
                     <label for="email">Email address</label>
                     <div class="input-group" >
                       <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                      <input type="email" class="form-control" formControlName="email" [ngClass]="{ 'error' : email.invalid && email.dirty }" placeholder="Enter email">
+                      <input type="email" class="form-control" formControlName="email" [ngClass]="{ 'error' : email.invalid && (email.dirty || email.touched) }" placeholder="Enter email">
                     </div>
-                    <em class="text-danger" *ngIf="email.invalid && email.dirty">Please enter valid email</em>
+                    <em class="text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">Please enter valid email</em>
                   </div>
                 </div>
               </div>
@@ -92,10 +92,9 @@
                     <label for="confirmPassword">Confirm Password</label>
                     <div class="input-group" >
                       <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                      <input type="password" class="form-control" formControlName="confirmPassword" [ngClass]="{ 'error' : confirmPassword.invalid && confirmPassword.dirty }" placeholder="Confirm Password">
+                      <input type="password" class="form-control" validateEqual="password" formControlName="confirmPassword" [ngClass]="{ 'error' : confirmPassword.invalid && confirmPassword.dirty }" placeholder="Confirm Password">
                     </div>
-                    <em class="text-danger" *ngIf="confirmPassword.invalid && confirmPassword.dirty">Please enter valid password</em>
-                    <em class="text-danger" *ngIf="confirmPasswordEvent()">Password does not matches</em>
+                    <em class="text-danger" *ngIf="confirmPassword.invalid && confirmPassword.dirty">Password does not matches</em>                    
                   </div>
                 </div>
                 <div class="col-md-4">

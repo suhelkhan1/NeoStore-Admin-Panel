@@ -20,24 +20,19 @@
 
 
 
-<!--<form #fileUploadForm="ngForm" (ngSubmit)="uploadFiles(fileUploadForm.value)">
-  <input type="file" [(ngModel)]="fileUpload" name="fileUpload" (change)="onChange($event)"
-  [ngClass]="{ 'error' : fileUploadForm.controls.fileUpload?.invalid && fileUploadForm.controls.fileUpload?.dirty }">
-  <em class="text-danger" *ngIf="fileUploadForm.controls.fileUpload?.invalid && fileUploadForm.controls.fileUpload?.dirty">Please Upload File</em>
-  <button type="submit" class="btn btn-primary">Upload</button>
-</form>-->
 
 
-<div class="content-wrapper">
-  <!--content header-->
+
+<!--<div class="content-wrapper">
+
   <app-content-header></app-content-header>
 
-  <!-- Main content -->
+
   <section class="content">
     <div class="row">
-      <!-- left column -->
+
       <div class="col-md-12">
-        <!-- general form elements -->
+
         <div class="box box-primary">
           <div class="box-header with-border">
             <h3 class="box-title">User form with file upload</h3>
@@ -96,4 +91,53 @@
       </div>
     </div>
   </section>
+</div>-->
+
+<div class="content-wrapper">
+  <app-content-header></app-content-header>
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">User form with file upload</h3>
+          </div>
+          <form #fileUploadForm="ngForm" (ngSubmit)="uploadImage(fileUploadForm.value)">
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="fileUpload">Upload File</label>
+                    <div class="input-group">
+                      <label class="input-group-btn">
+                          <span class="btn btn-primary">
+                              Browse&hellip; 
+                              <input type="file"
+                                class="form-control"
+                                style="display: none;"                     
+                                [(ngModel)]="fileUpload" 
+                                id="fileUpload"
+                                multiple
+                                name="fileUpload">
+                          </span>
+                      </label>
+                      <input type="text" id="uploadFiles" class="form-control" readonly>
+                      <!--<em [ngClass]="{ 'error' : fileUploadForm.controls.fileUpload?.invalid && fileUploadForm.controls.fileUpload?.dirty }" class="text-danger" *ngIf="fileUploadForm.controls.fileUpload?.invalid && fileUploadForm.controls.fileUpload?.dirty">Please Upload File</em>-->
+                    </div>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="box-footer">
+              <button type="submit" class="btn btn-primary">Upload</button>
+              <button type="submit" [routerLink]="['/admin']" class="btn btn-danger">Cancel</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
+

@@ -16,10 +16,10 @@ import { IImage } from '../../../interfaces/image.model'
 
 export class FileUploadComponent implements OnInit {
 
-  /*input: any
+  input: any
   label: any
   numFiles: any
-  element: any*/
+  element: any
 
   constructor(
     @Inject(JQ_TOKEN) private $:any,
@@ -27,17 +27,17 @@ export class FileUploadComponent implements OnInit {
     private toastr: ToastsManager
   ) {}
   
-  fileUploadForm: FormGroup
-  private username: FormControl
-  private email: FormControl
+  /*fileUploadForm: FormGroup
+  private fileUpload: FormControl*/
   fileUpload: any
-  /*fileUpload:any*/
+  file: any
 
   ngOnInit() {
 
-    /*this.$('#fileUpload').on('change', (event) => {
+    this.$('#fileUpload').on('change', (event) => {
       this.input = event
       this.numFiles = event.currentTarget.files.length
+      this.file = event.currentTarget.files[0]
       this.label = this.input.currentTarget.value.replace(/^.*[\\\/]/, '');
       if(this.numFiles === 0){
         this.$('#uploadFiles').val(' No file choosen')
@@ -46,23 +46,20 @@ export class FileUploadComponent implements OnInit {
       } else {
         this.$('#uploadFiles').val(this.label)
       }
-    })*/
+    })
 
-    this.username = new FormControl('', [
+    /*this.fileUpload = new FormControl('', [
       Validators.required
     ])
 
-    this.email = new FormControl('', [
-      Validators.required
-    ])
+    
 
     this.fileUploadForm = new FormGroup ({
-      username: this.username,
-      email: this.email
-    })
+      fileUpload: this.fileUpload
+    })*/
   }
 
-  onSelect(event: any): void {
+  /*onSelect(event: any): void {
       let args = event.args;
       let fileName = args.file;
       let fileSize = args.size;
@@ -87,13 +84,12 @@ export class FileUploadComponent implements OnInit {
       let serverResponce = args.response;
       console.log('Uploaded fileName: ', fileName)
       console.log('Uploaded server response: ', serverResponce)
-  };
+  };*/
 
-  uploadFiles(formValues){
+  /*uploadFiles(formValues){
     console.log(formValues)
     let userInfo = {
-      username: this.username,
-      email : this.email
+      username: this.fileUpload,
     }
 
     this.userService.addUser2(formValues).subscribe(
@@ -107,18 +103,19 @@ export class FileUploadComponent implements OnInit {
         return error
       }
     )
-  }
+  }*/
 
-  uploadImage(){
-    let imageinfo = {
+  uploadImage(formValues){
+    /*let imageinfo = {
       productId: '595376cdbf493511744064b0',
       userId: '',
       belognsTo: 'product',
       image_isactive: true
-    }
-    this.userService.imageUpload(imageinfo).subscribe(
+      file: this.fileUpload
+    }*/
+    this.userService.imageUpload(this.file).subscribe(
       (response: IImage) => {
-        this.toastr.success('Image Uploaded')
+        this.toastr.success('Image Uploaded', 'Success!')
         return response
       },
       (error: Error) => {

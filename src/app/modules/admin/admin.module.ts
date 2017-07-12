@@ -66,6 +66,7 @@ declare let toastr: Toast
 
 //Products Services
 import { ProductService } from './providers/product/product.service';
+import { EqualValidatorDirective } from './directives/equal-validator/equal-validator.directive';
 
 @NgModule({
   imports: [
@@ -104,7 +105,8 @@ import { ProductService } from './providers/product/product.service';
     GetOrderComponent,
     UpdateOrderComponent,
     GetUsersComponent,
-    LocationComponent
+    LocationComponent,
+    EqualValidatorDirective
   ],
   providers:[
     UserService,
