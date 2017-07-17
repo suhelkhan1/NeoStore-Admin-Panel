@@ -40,6 +40,25 @@ export class AuthService {
     })
   }
 
+   resetPassword(email): Observable<string>{   
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.url +'reset', JSON.stringify(email), options).map( (response: Response) => {
+      return <string>response.json()
+    })
+  }
+
+  setPassword(setInfo): Observable<string>{
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    let password = {
+      newPassword: setInfo.password
+    }
+    return this.http.post(this.url +'reset-password'+'?access_token='+ setInfo.token , JSON.stringify(password), options).map( (response: Response) => {
+      return <string>response.json()
+    })
+  }
+
   ifLoggedIn(){
     return this.loggedIn
   }

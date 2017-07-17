@@ -10,7 +10,8 @@ export interface IUser {
     phone_no: number,
     birth_date: Date,
     role: string,
-    username: string
+    username: string,
+    is_active: boolean
 }
 
 

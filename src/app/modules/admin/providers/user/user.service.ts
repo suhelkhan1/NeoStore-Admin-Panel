@@ -54,11 +54,10 @@ export class UserService {
       return <IUser>response.json()
     })
   }
-  handleError(error: Response) { 
-    return Observable.throw(error.json());
-  }
 
-  //Test for file upload
+  /*addUser2 and imageUpload
+   are test to check whether images 
+   are uploadinfg or not */
   addUser2(userInfo): Observable<IUser2> {   
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
@@ -77,4 +76,7 @@ export class UserService {
     })
   }
 
+  handleError(error: Response) { 
+    return Observable.throw(error.json());
+  }
 }

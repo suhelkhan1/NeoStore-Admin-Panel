@@ -29,6 +29,7 @@ export class UpdateUserComponent implements OnInit {
 
   updateUserForm: FormGroup
   private userRoles: FormControl
+  private isActive: FormControl
   private firstName: FormControl
   private lastName: FormControl
   private email: FormControl
@@ -51,6 +52,8 @@ export class UpdateUserComponent implements OnInit {
       //console.log(this.gender)
     })*/
 
+    this.userRoles = new FormControl('', [Validators.required])
+    this.isActive = new FormControl('', [Validators.required])
     this.firstName = new FormControl('', [Validators.required])
     this.lastName = new FormControl('', [Validators.required])
     this.email = new FormControl({
@@ -59,17 +62,17 @@ export class UpdateUserComponent implements OnInit {
     }, [
       Validators.required
     ])
-    this.userRoles = new FormControl('', [Validators.required])
     this.gender = new FormControl('', [Validators.required])
     this.phoneNumber = new FormControl('', [Validators.required])
     this.dateOfBirth = new FormControl('', [Validators.required])
     this.username = new FormControl('', [Validators.required])
 
     this.updateUserForm = new FormGroup ({
+      userRoles: this.userRoles,
+      isActive: this.isActive,
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
-      userRoles: this.userRoles,
       gender: this.gender,
       phoneNumber: this.phoneNumber,
       dateOfBirth: this.dateOfBirth,
@@ -102,10 +105,11 @@ export class UpdateUserComponent implements OnInit {
     this.user = user
 
     this.updateUserForm.patchValue({
+      userRoles: this.user.role,
+      isActive: this.user.is_active,
       firstName: this.user.first_name,
       lastName: this.user.last_name,
       email: this.user.email,
-      userRoles: this.user.role,
       gender: this.user.gender,
       phoneNumber: this.user.phone_no,
       dateOfBirth: new Date(this.user.birth_date).toISOString().split('T')[0],
@@ -122,7 +126,7 @@ export class UpdateUserComponent implements OnInit {
       gender: formValues.gender,
       phone_no: formValues.phoneNumber,
       birth_date: formValues.dateOfBirth,
-      is_active: true,
+      is_active: formValues.isActive,
       username: formValues.username
     }
     console.log(userInfo)

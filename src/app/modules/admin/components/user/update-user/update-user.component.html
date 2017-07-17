@@ -32,6 +32,20 @@
                   </div>
                 </div>
                 <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="isActive">User Status</label>
+                    <div class="input-group" >
+                      <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                      <select formControlName="isActive" ngControl="isActive" id="isActive" class="form-control" [ngClass]="{ 'error' : isActive.invalid && isActive.dirty }">
+                        <option [selected]="isActive.value == null" value="">Select</option>
+                        <option [selected]="isActive.value == true" value=true>Active</option>
+                        <option [selected]="isActive.value == false" value=false>Deactive</option>
+                      </select>
+                    </div>
+                    <em class="text-danger" *ngIf="isActive.invalid && isActive.dirty">Please select role</em>
+                  </div>
+                </div>
+                <div class="col-md-4">
                   <div class="form-group" >
                     <label for="username">User Name</label>
                     <div class="input-group" >

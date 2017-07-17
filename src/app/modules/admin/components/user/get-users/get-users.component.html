@@ -21,6 +21,7 @@
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    <th>Active</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -31,6 +32,10 @@
                     <td>{{user.last_name}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.phone_no}}</td>
+                    <td class="text-center">
+                      <i *ngIf="user.is_active" class="text-center text-success fa fa-check" aria-hidden="true"></i>
+                      <i *ngIf="!user.is_active" class="text-danger fa fa-times-circle" aria-hidden="true"></i>
+                    </td>
                     <th class="text-center">
                       <div class="btn btn-group no-padding">
                         <button (click)="viewClickListner(user)" type="button" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></button>

@@ -25,7 +25,7 @@ export class ForgetPasswordComponent implements OnInit {
   loginInvalid: boolean = false
 
   forgotPasswordForm: FormGroup;
-  email: FormControl;
+  email: FormControl; 
   user: any
   
   errorMessage: string = "";
@@ -44,7 +44,7 @@ export class ForgetPasswordComponent implements OnInit {
     //Login Form validation
     this.email = new FormControl('', [
       Validators.required, 
-      Validators.maxLength(20),
+      Validators.maxLength(30),
       Validators.email
     ]);
     this.forgotPasswordForm = new FormGroup({
@@ -54,6 +54,15 @@ export class ForgetPasswordComponent implements OnInit {
 
   forgotPassword(formValues){
     console.log(formValues)
+    this.authService.resetPassword(formValues).subscribe(
+      (response) => {
+        this.toastr.success('Email sent to your mail','Success!' , { dismiss: 'click'})
+        return response
+      },
+      (error: Error) =>{
+        return error
+      }
+    )
   }
 
 

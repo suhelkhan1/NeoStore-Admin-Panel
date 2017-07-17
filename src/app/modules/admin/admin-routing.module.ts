@@ -64,7 +64,7 @@ import { AuthGuard } from '../../gaurds/auth.guard'
             { path:'uploadfile', component: FileUploadComponent, data: { breadcrumb : 'Upload File'} },
             
             { path:'404', component: PageNotfoundComponent, data: { breadcrumb : '404'} },
-            //{ path:'**', redirectTo:'404', pathMatch:'full'}
+            { path:'**', redirectTo:'404', pathMatch:'full'}
           ]
         }]
      }
