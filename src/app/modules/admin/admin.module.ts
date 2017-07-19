@@ -114,6 +114,9 @@ import { EqualValidatorDirective } from './directives/equal-validator/equal-vali
     { provide: ToastOptions, useClass: CustomOption },
     { provide: JQ_TOKEN , useValue: jQuery}
   ],
-  exports: [AdminComponent]
+  exports: [
+    AdminComponent,
+    EqualValidatorDirective
+  ]
 })
 export class AdminModule { }
