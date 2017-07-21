@@ -24,7 +24,10 @@ export class GetUsersComponent implements OnInit {
   getUser(){
     this.$(document).ready( ()=> {
       let el = this.$(this.elementRef.nativeElement).find("#userTable")[0];
-      this.$(el).DataTable();
+      this.$(el).DataTable({
+        "lengthMenu": [ [2, 4, 8, -1], [2, 4, 8, "All"] ],
+        "pageLength": 4
+      });
     })
   }
   viewClickListner(user){

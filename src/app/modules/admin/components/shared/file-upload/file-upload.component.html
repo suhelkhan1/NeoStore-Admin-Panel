@@ -1,99 +1,4 @@
-<!--<form [formGroup]="fileUploadForm" (ngSubmit)="uploadFiles(fileUploadForm.value)">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <div class="input-group">
-      <label class="input-group-btn">
-        <span class="btn btn-primary">
-          Browse&hellip; 
-          <input type="file" id="fileUpload" formControlName="fileUpload" [ngClass]="{ 'error' : fileUpload.invalid && fileUpload.dirty }" style="display: none;" multiple>
-        </span>
-      </label>
-      <input type="text"  id="uploadFiles" class="form-control" readonly>
-      <em class="text-danger" *ngIf="fileUpload.invalid && fileUpload.dirty">Please Upload File</em>
-    </div>
-    </div>
-    <div class="panel-footer">
-      <button type="submit" class="btn btn-primary">Upload</button>
-    </div>
-  </div>
-</form>-->
-
-
-
-
-
-
 <!--<div class="content-wrapper">
-
-  <app-content-header></app-content-header>
-
-
-  <section class="content">
-    <div class="row">
-
-      <div class="col-md-12">
-
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">User form with file upload</h3>
-          </div>
-          <form [formGroup]="fileUploadForm" (ngSubmit)="fileUploadForm.valid && fileUploadForm.value" novalidate>
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" 
-                      formControlName="username" 
-                      [ngClass]="{ 'error' : username.invalid && username.dirty }"
-                      name="username" placeholder="Enter Username">
-                  </div>
-                  <em class="text-danger" *ngIf="username.invalid && username.dirty">Please enter username</em>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="email">email</label>
-                    <input type="email" class="form-control" 
-                      formControlName="email" 
-                      [ngClass]="{ 'error' : email.invalid && email.dirty }" name="email"
-                      placeholder="Enter email">
-                  </div>
-                  <em class="text-danger" *ngIf="email.invalid && email.dirty">Please enter email</em>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="fileUpload">Upload File</label>
-                    <jqxFileUpload  [width]="300" 
-                                    [uploadUrl]="'http://10.0.100.221:3000/api/images/profileData'" 
-                                    [fileInputName]="'fileToUpload'"
-                                    [cancelTemplate]="'danger'" 
-                                    [browseTemplate]="'success'" 
-                                    [uploadTemplate]="'primary'"
-                                    (onSelect)="onSelect($event)"
-                                    (onRemove)="onRemove($event)"
-                                    (onUploadStart)="onUploadStart($event)"
-                                    (onUploadEnd)="onUploadEnd($event)"s>
-                    </jqxFileUpload>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="box-footer">
-              <button type="submit" [disabled]="fileUploadForm.invalid" class="btn btn-primary">Save</button>
-              <button type="submit" [routerLink]="['/admin']" class="btn btn-danger">Cancel</button>
-            </div>
-
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>-->
-
-<div class="content-wrapper">
   <app-content-header></app-content-header>
   <section class="content">
     <div class="row">
@@ -102,42 +7,40 @@
           <div class="box-header with-border">
             <h3 class="box-title">User form with file upload</h3>
           </div>
-          <form #fileUploadForm="ngForm" (ngSubmit)="uploadImage(fileUploadForm.value)">
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="fileUpload">Upload File</label>
-                    <div class="input-group">
-                      <label class="input-group-btn">
-                          <span class="btn btn-primary">
-                              Browse&hellip; 
-                              <input type="file"
-                                class="form-control"
-                                style="display: none;"                     
-                                [(ngModel)]="fileUpload" 
-                                id="fileUpload"
-                                multiple
-                                name="fileUpload">
-                          </span>
-                      </label>
-                      <input type="text" id="uploadFiles" class="form-control" readonly>
-                      <!--<em [ngClass]="{ 'error' : fileUploadForm.controls.fileUpload?.invalid && fileUploadForm.controls.fileUpload?.dirty }" class="text-danger" *ngIf="fileUploadForm.controls.fileUpload?.invalid && fileUploadForm.controls.fileUpload?.dirty">Please Upload File</em>-->
-                    </div>                  
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="box-footer">
-              <button type="submit" class="btn btn-primary">Upload</button>
-              <button type="submit" [routerLink]="['/admin']" class="btn btn-danger">Cancel</button>
-            </div>
 
-          </form>
+          <div class="box-body">
+
+          </div>
+
+          <div class="box-footer">
+            <button type="button" (click)="uploadImage()" class="btn btn-primary">Upload</button>
+            <button type="button" [routerLink]="['/admin']" class="btn btn-danger">Cancel</button>
+          </div>
+
         </div>
       </div>
     </div>
   </section>
 </div>
-
+-->
+<div class="row">
+  <div class="col-md-4">
+    <label for="fileUpload">Upload File</label>
+    <div class="input-group">
+      <label class="input-group-btn">
+          <span class="btn btn-primary">
+              Browse&hellip; 
+              <input type="file"
+                (change)="fileEvent($event)"
+                class="form-control"
+                style="display: none;"                     
+                [(ngModel)]="fileUpload" 
+                id="fileUpload"
+                multiple
+                name="fileUpload">
+          </span>
+      </label>
+      <input type="text" [(ngModel)]="uploadFiles" class="form-control" readonly>
+    </div>
+  </div>
+</div>

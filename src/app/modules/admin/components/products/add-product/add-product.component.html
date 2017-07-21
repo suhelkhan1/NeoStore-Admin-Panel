@@ -129,17 +129,7 @@
                   <em class="text-danger" *ngIf="material.invalid && material.dirty">Please Enter Material</em>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="fileUpload">Upload File</label>
-                    <jqxFileUpload [width]="300" 
-                                   [uploadUrl]="'imageUpload.php'" 
-                                   [fileInputName]="'fileToUpload'">
-                    </jqxFileUpload>
-                  </div>
-                </div>
-              </div>
+              <app-file-upload></app-file-upload>
             </div>
             <!-- /.box-body -->
 

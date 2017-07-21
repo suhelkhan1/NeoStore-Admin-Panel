@@ -68,6 +68,10 @@ declare let toastr: Toast
 import { ProductService } from './providers/product/product.service';
 import { EqualValidatorDirective } from './directives/equal-validator/equal-validator.directive';
 
+//Image Service
+import { ImageService } from './providers/image/image.service'
+import { ImageUploadService } from './providers/image-upload/image-upload.service'
+
 @NgModule({
   imports: [
     CommonModule,
@@ -111,6 +115,8 @@ import { EqualValidatorDirective } from './directives/equal-validator/equal-vali
   providers:[
     UserService,
     ProductService,
+    ImageService,
+    ImageUploadService,
     { provide: ToastOptions, useClass: CustomOption },
     { provide: JQ_TOKEN , useValue: jQuery}
   ],

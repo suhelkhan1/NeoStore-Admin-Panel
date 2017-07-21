@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from'@angular/router'
 import { jqxFileUploadComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxfileupload';
@@ -7,6 +7,7 @@ import { ToastsManager } from 'ng2-toastr'
 import { ProductService } from '../../../providers/product/product.service'
 import { IProduct, IProductCategory } from '../../../interfaces/product.model'
 import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
+import { ImageUploadService } from '../../../providers/image-upload/image-upload.service'
 
 @Component({
   selector: 'app-add-product',
@@ -23,6 +24,7 @@ export class AddProductComponent implements OnInit {
     private productService: ProductService,
     private toastr: ToastsManager,
     private router: Router,
+    private imageUploadService: ImageUploadService,
     @Inject(JQ_TOKEN) private $: any
   ) { }
 
@@ -98,10 +100,14 @@ export class AddProductComponent implements OnInit {
      product_color: formValues.colour,
      product_dimension: formValues.dimension,
      product_material: formValues.material,
+     product_isactive: true,
+     product_img : []
     }
     this.productService.addProduct(productDetails).subscribe(
       (response: IProduct)=>{
         this.toastr.success('Product Added', 'Success!')
+        this.imageUploadService.insertData(response.id)
+        this.imageUploadService.uploadImage()
         this.router.navigate(['/admin/getproducts'])
         return response
       },
