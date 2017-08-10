@@ -25,37 +25,38 @@ export class GetProductsComponent implements OnInit {
   products: any
 
   ngOnInit() {
+     this.getProducts()
+  }
+  getProducts(){
     this.productService.getProductDetails().subscribe( 
       (response: IProduct) => {
         this.products = response
-        this.getProducts()
       },
       (error) => {
         this.toastr.error(error['error'].statusCode, 'Error!')
         return error
       }
-    );  
-  }
-  getProducts(){
+    )
+
     this.$(document).ready( ()=> {
       let el = this.$(this.elementRef.nativeElement).find("#productsTable")[0];
       this.$(el).DataTable();
     })
   }
 
-  /*deleteProductCategory(productCategory){
-    this.productService.deleteProductCategory(productCategory.id).subscribe(
+  deleteProduct(product){
+    this.productService.deleteProduct(product.id).subscribe(
       (response: IProduct) => {
         this.toastr.success('Successfully Deleted')
         this.getProducts()
         return response
       },
       (error: Error) => {
-        this.toastr.error('Product Category is not deleted')
+        this.toastr.error('Product is not deleted')
         return error
       }
     )
-  }*/
+  }
 
   veiwClickListner(product){
     this.route.navigate(['admin/getproduct/', product.id])

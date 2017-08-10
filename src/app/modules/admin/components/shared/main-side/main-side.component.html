@@ -29,6 +29,7 @@
             <li><a [routerLink]="['adduser']"><i class="fa fa-user-plus"></i> Add User</a></li>
           </ul>
         </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-th"></i> <span>Products</span>
@@ -50,6 +51,30 @@
                 <li><a [routerLink]="['addprductcategory']" href="#"><i class="fa fa-plus"></i> Add Products Category</a></li>
               </ul>
             </li>
+          </ul>
+        </li>
+        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list-alt"></i> <span>Orders</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a [routerLink]="['getorders']"><i class="fa fa-th-list"></i> List Orders</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-shopping-cart"></i> <span>Carts</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a [routerLink]="['getcarts']"><i class="fa fa-cart-arrow-down"></i> List Carts</a></li>
           </ul>
         </li>
       </ul>

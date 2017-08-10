@@ -1,4 +1,4 @@
-<!--<div class="content-wrapper">
+<div class="content-wrapper">
   <app-content-header></app-content-header>
   <section class="content">
     <div class="row">
@@ -9,7 +9,27 @@
           </div>
 
           <div class="box-body">
-
+            <div class="row">
+              <div class="col-md-4">
+                <label for="fileUpload">Upload File</label>
+                <div class="input-group">
+                  <label class="input-group-btn">
+                      <span class="btn btn-primary">
+                          Browse&hellip; 
+                          <input type="file"
+                            (change)="fileEvent($event)"
+                            class="form-control"
+                            style="display: none;"                     
+                            [(ngModel)]="fileUpload" 
+                            id="fileUpload"
+                            multiple
+                            name="fileUpload">
+                      </span>
+                  </label>
+                  <input type="text" [(ngModel)]="uploadFiles" class="form-control" readonly>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="box-footer">
@@ -22,25 +42,5 @@
     </div>
   </section>
 </div>
--->
-<div class="row">
-  <div class="col-md-4">
-    <label for="fileUpload">Upload File</label>
-    <div class="input-group">
-      <label class="input-group-btn">
-          <span class="btn btn-primary">
-              Browse&hellip; 
-              <input type="file"
-                (change)="fileEvent($event)"
-                class="form-control"
-                style="display: none;"                     
-                [(ngModel)]="fileUpload" 
-                id="fileUpload"
-                multiple
-                name="fileUpload">
-          </span>
-      </label>
-      <input type="text" [(ngModel)]="uploadFiles" class="form-control" readonly>
-    </div>
-  </div>
-</div>
+
+

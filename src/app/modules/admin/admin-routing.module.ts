@@ -26,8 +26,15 @@ import { GetOrdersComponent } from './components/orders/get-orders/get-orders.co
 import { GetOrderComponent } from './components/orders/get-order/get-order.component';
 import { UpdateOrderComponent } from './components/orders/update-order/update-order.component';
 
+//Cart components
+import { GetCartsComponent } from './components/cart/get-carts/get-carts.component'
+import { GetCartComponent } from './components/cart/get-cart/get-cart.component'
+import { UpdateCartComponent } from './components/cart/update-cart/update-cart.component'
+
+//File upload test component
 import { FileUploadComponent } from './components/shared/file-upload/file-upload.component'
 
+//Authemtication gaurd which prevents routing from unauthorized access 
 import { AuthGuard } from '../../gaurds/auth.guard'
 
 @NgModule({
@@ -48,19 +55,29 @@ import { AuthGuard } from '../../gaurds/auth.guard'
             { path:'getuser/:id', component: GetUserComponent, data: { breadcrumb : 'User Info'} },
             { path:'updateuser/:id', component: UpdateUserComponent, data: { breadcrumb : 'Update User'}},
             
+            //Product Routes
             { path:'addproduct', component: AddProductComponent, data: { breadcrumb : 'Add product'} },
             { path:'getproducts', component: GetProductsComponent, data: { breadcrumb : 'List of Products'} },
             { path:'getproduct/:id', component: GetProductComponent, data: { breadcrumb : 'Product Info'} },
             { path:'updateproduct/:id', component: UpdateProductComponent, data: { breadcrumb : 'Update Product'} },
 
+            //Product Category routes
             { path:'addprductcategory', component: AddProductCategoryComponent, data: { breadcrumb : 'Add Product Category'} },
             { path:'getproductcategories', component: GetProductCategoriesComponent, data: { breadcrumb : 'List of Product Categories'} },
             { path:'updateproductcategory/:id', component: UpdateProductCategoryComponent, data: { breadcrumb : 'Update Product Category'} },
             { path:'viewproductcategory/:id', component: ViewProductCategoryComponent, data: { breadcrumb : 'Product Category Info'} },
 
-            { path:'getorders', component: GetOrdersComponent, data: { breadcrumb : 'List od Orders'} },
+            //Orders routes 
+            { path:'getorders', component: GetOrdersComponent, data: { breadcrumb : 'List of Orders'} },
             { path:'getorder/:id', component: GetOrderComponent, data: { breadcrumb : 'Order'} },
-            { path:'updateorder', component: UpdateOrderComponent, data: { breadcrumb : 'Update Order'} },
+            { path:'updateorder/:id', component: UpdateOrderComponent, data: { breadcrumb : 'Update Order'} },
+            
+            //Cart rooutes
+            {path:'getcarts', component: GetCartsComponent, data: { breadcrumb: 'List of Carts' }},
+            {path:'getcart/:id', component: GetCartComponent, data: { breadcrumb: 'Cart' }},
+            {path:'updatecart/:id', component: UpdateCartComponent, data: { breadcrumb: 'Update Cart' }},
+
+            //Test file upload route
             { path:'uploadfile', component: FileUploadComponent, data: { breadcrumb : 'Upload File'} },
             
             { path:'404', component: PageNotfoundComponent, data: { breadcrumb : '404'} },

@@ -17,6 +17,12 @@
           <div class="box-body" *ngIf="user">
             <div class="row">
               <div class="col-md-6">
+                <label>Profile Picture</label>
+                <img [src]="user.Profile_IMG.ThumbURL" class="img img-responsive img-circle" alt="profile_image" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
                 <label>User Name</label>
                 <p>{{user.username}}</p>
               </div>

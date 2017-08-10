@@ -35,13 +35,15 @@
                     <td>{{product.categoryId}}</td>
                     <td>{{product.product_cost}}</td>
                     <td>{{product.product_stock}}</td>
-                    <td>{{product.product_color}}</td>
+                    <td>
+                      <p class="color-box" [ngStyle]="{'background-color': product.product_color.color_code}"></p>
+                    </td>
                     <td>{{product.product_material}}</td>
                     <th class="text-center">
                       <div class="btn btn-group no-padding">
                         <button (click)="veiwClickListner(product)" type="button" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></button>
                         <button (click)="editClickListner(product)" type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></button>
-                        <button type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+                        <button (click)="deleteProduct(product)" type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
                       </div>
                     </th>
                   </tr>

@@ -27,6 +27,7 @@ export class GetUserComponent implements OnInit {
     })
   }
 
+
   getUser(id){
     this.userService.getUser(id).subscribe( 
       (response: IUser)=>{
@@ -40,5 +41,6 @@ export class GetUserComponent implements OnInit {
       }
     )
   }
+
 
 }

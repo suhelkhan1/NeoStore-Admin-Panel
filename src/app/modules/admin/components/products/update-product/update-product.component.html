@@ -24,7 +24,7 @@
                       <span class="input-group-addon"><i class="fa fa-sitemap"></i></span>
                       <select name="productCategory" formControlName="productCategory" ngControl="productCategory" class="form-control" [ngClass]="{ 'error' : productCategory.invalid && productCategory.dirty }">
                         <option [selected]="productCategory.value == null"  value="" >Select</option>
-                        <option [selected]="productCategory.value == category" value="category">Categories</option>                        
+                        <option *ngFor="let productCat of productCategories" [value]="productCat.id">{{productCat.category_name}}</option>
                       </select>
                     </div>
                     <em class="text-danger" *ngIf="productCategory.invalid && productCategory.dirty">Please Select Product Category</em>
@@ -87,7 +87,7 @@
                     <label for="stockin">Stock in</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-shopping-basket"></i></span>
-                      <input type="password" class="form-control" formControlName="stockin" [ngClass]="{ 'error' : stockin.invalid && stockin.dirty }"
+                      <input type="number" class="form-control" formControlName="stockin" [ngClass]="{ 'error' : stockin.invalid && stockin.dirty }"
                         name="stockin" placeholder="Enter Stock">
                     </div>
                     <em class="text-danger" *ngIf="stockin.invalid && stockin.dirty">Please Enter Stock</em>
@@ -130,22 +130,49 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="fileUpload">Upload File</label>
-                    <jqxFileUpload [width]="300" 
-                                   [uploadUrl]="'imageUpload.php'" 
-                                   [fileInputName]="'fileToUpload'">
-                    </jqxFileUpload>
+                <div class="col-md-10">
+                  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                    aria-controls="collapseExample" (click)="showImage = !showImage"> 
+                          {{showImage ? 'Show Images' : 'Hide Images'}}                          
+                  </button>
+                  <div class="collapse" id="collapseExample">
+                    <br>
+                    <div class="col-md-3" *ngFor="let img of productImages">
+                      <div class="img-wrap">
+                        <span class="close"><i class="fa fa-times-circle text-danger"></i></span>
+                        <img [src]="img.ThumbURL250" class="img-thumbnail" alt="product_image" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              
+              <br>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="fileUpload">Upload New Image</label>
+                  <div class="input-group">
+                    <label class="input-group-btn">
+                        <span class="btn btn-primary">
+                            Browse&hellip; 
+                            <input type="file"
+                              (change)="fileEvent($event)"
+                              class="form-control"
+                              style="display: none;"                                               
+                              id="fileUpload"                              
+                              name="fileUpload">
+                        </span>
+                    </label>
+                    <input type="text" formControlName="fileLabel" class="form-control" readonly>
+                  </div>
+                </div>
+              </div>
+
             </div>
             <!-- /.box-body -->
 
             <div class="box-footer">
               <button type="submit" [disabled]="updateProductForm.invalid" class="btn btn-primary">Save</button>
+              <button type="submit" [routerLink]="['/admin/getproducts']" class="btn btn-danger">Cancel</button>
             </div>
           </form>
         </div>

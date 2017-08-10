@@ -1,0 +1,58 @@
+<div class="content-wrapper">
+  <!--content header-->
+  <app-content-header></app-content-header>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="box box-primary" >
+          <div class="box-header with-border">
+            <h3 class="box-title">View Cart</h3>
+          </div>
+          <!-- /.box-header -->
+
+          <div class="box-body" *ngIf="cart">
+
+            <div class="row">
+              <div class="col-md-6">
+                <label>Cart Id</label>
+                <p>{{cart.id}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>User Id </label>
+                <p>{{cart.userid}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Product Id </label>
+                <p>{{cart.productid}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Quantity</label>
+                <p>{{cart.productqty}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Stock</label>
+                <p>{{cart.instock}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="box-footer">
+            <button type="button" [routerLink]="['/admin/getcarts']" class="btn btn-primary">Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /.box -->
+</div>

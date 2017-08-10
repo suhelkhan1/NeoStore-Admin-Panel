@@ -25,8 +25,8 @@ export class GetUsersComponent implements OnInit {
     this.$(document).ready( ()=> {
       let el = this.$(this.elementRef.nativeElement).find("#userTable")[0];
       this.$(el).DataTable({
-        "lengthMenu": [ [2, 4, 8, -1], [2, 4, 8, "All"] ],
-        "pageLength": 4
+        "lengthMenu": [ [10, 25, 100, -1], [10, 25, 100, "All"] ],
+        "pageLength": 10
       });
     })
   }

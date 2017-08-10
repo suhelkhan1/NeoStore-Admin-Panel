@@ -7,7 +7,8 @@ import { ToastsManager } from 'ng2-toastr'
 import { ProductService } from '../../../providers/product/product.service'
 import { IProduct, IProductCategory } from '../../../interfaces/product.model'
 import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
-import { ImageUploadService } from '../../../providers/image-upload/image-upload.service'
+import { ImageService } from '../../../providers/image/image.service'
+import { ColorService } from '../../../providers/color/color.service'
 
 @Component({
   selector: 'app-add-product',
@@ -24,11 +25,13 @@ export class AddProductComponent implements OnInit {
     private productService: ProductService,
     private toastr: ToastsManager,
     private router: Router,
-    private imageUploadService: ImageUploadService,
+    private imageService: ImageService,
+    private colorService: ColorService,
     @Inject(JQ_TOKEN) private $: any
   ) { }
 
   productCategories: IProductCategory
+  colors
 
   addProductForm: FormGroup
   private productCategory: FormControl
@@ -40,6 +43,13 @@ export class AddProductComponent implements OnInit {
   private colour: FormControl
   private dimension: FormControl
   private material: FormControl
+  private fileLabel: FormControl
+
+  hasImage: boolean = false
+  file: File
+  productId: string
+  numFiles: number
+  currentColor
 
   ngOnInit() {
     //Add the login-page class to the body
@@ -59,9 +69,10 @@ export class AddProductComponent implements OnInit {
     this.description = new FormControl('', [Validators.required])
     this.cost = new FormControl('', [Validators.required])
     this.stockin = new FormControl('', [Validators.required])
-    this.colour = new FormControl('', [Validators.required])
+    this.colour = new FormControl({value:'', disabled: true}, [Validators.required])
     this.dimension = new FormControl('', [Validators.required])
     this.material = new FormControl('', [Validators.required])
+    this.fileLabel = new FormControl('No file choosen')
 
     this.addProductForm = new FormGroup ({
       productName: this.productName,
@@ -72,7 +83,8 @@ export class AddProductComponent implements OnInit {
       dimension: this.dimension,
       material: this.material,
       cost: this.cost,
-      stockin: this.stockin
+      stockin: this.stockin,
+      fileLabel: this.fileLabel
     })
 
     this.productService.getProductCategories().subscribe(
@@ -85,6 +97,23 @@ export class AddProductComponent implements OnInit {
         return error
       }
     )
+
+    this.colorService.getColors().subscribe(
+      (response)=>{
+        this.colors = response
+        return response
+      },
+      (error: Error)=>{
+        this.toastr.error(error['error'].statusCode, 'Error!')
+        return error
+      }
+    )
+
+  }
+
+  setColor(color){
+    this.colour.setValue(color.color_code)
+    this.currentColor = color
   }
 
   
@@ -97,22 +126,56 @@ export class AddProductComponent implements OnInit {
      product_description: formValues.description,
      product_cost: formValues.cost,
      product_stock: formValues.stockin,
-     product_color: formValues.colour,
+     product_color: this.currentColor,
      product_dimension: formValues.dimension,
      product_material: formValues.material,
-     product_isactive: true,
-     product_img : []
+     product_isactive: true
     }
     this.productService.addProduct(productDetails).subscribe(
       (response: IProduct)=>{
+        this.productId = response.id
+        this.fileUploadEvent()
         this.toastr.success('Product Added', 'Success!')
-        this.imageUploadService.insertData(response.id)
-        this.imageUploadService.uploadImage()
         this.router.navigate(['/admin/getproducts'])
         return response
       },
       (error: Error)=>{
         this.toastr.error(error['error'].statusCode, 'Error!')
+        return error
+      }
+    )
+    console.log(productDetails)
+  }
+
+  fileEvent(event){
+    this.hasImage = true
+    let inputFile = event
+    this.numFiles = inputFile.currentTarget.files.length
+    this.file = inputFile.target.files[0]
+    let label = inputFile.currentTarget.value.replace(/^.*[\\\/]/, '');
+    if(this.numFiles === 0){
+      this.hasImage = false
+      this.fileLabel.setValue('No file choosen')
+    } else if(this.numFiles > 1 && this.numFiles !== 0){
+        this.fileLabel.setValue(this.numFiles + ' files')
+    } else {
+        this.fileLabel.setValue(label)
+    }
+  }
+
+  fileUploadEvent(){
+    let imageInfo = {
+      file : this.file,
+      productId: this.productId
+    }
+    //console.log('Before',imageInfo)
+    this.imageService.imageUploadProduct(imageInfo).subscribe(
+      (response) =>{
+        this.toastr.success('Image Uploaded', 'Success!')
+        return response
+      },
+      (error: Error) =>{
+        this.toastr.error('Image Upload Failed', 'Error!')
         return error
       }
     )

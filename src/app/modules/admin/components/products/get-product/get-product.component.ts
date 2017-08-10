@@ -19,6 +19,7 @@ export class GetProductComponent implements OnInit {
   ) { }
 
   product: IProduct
+  productImg: any
   
   ngOnInit() {
     this.activatedRoute.params.subscribe( (params: Params) => {
@@ -31,6 +32,7 @@ export class GetProductComponent implements OnInit {
     this.productService.getProduct(id).subscribe( 
       (response: IProduct)=>{
         this.product = response
+        this.productImg = response.images
         return response
       },
       (error: Error)=>{

@@ -29,6 +29,8 @@ export class MainHeaderComponent implements OnInit {
         this.userProfile = response
       },
       (error: Error) => {
+        this.toastr.error('Not an authenticated user','Access Denied')
+        this.router.navigate(['login'])
         return error
       }
     )

@@ -16,6 +16,13 @@
 
           <div class="box-body">
             <div class="row">
+              <div class="col-md-3">
+              <label>Product Category Picture</label>
+                <img [src]="productCategory.images.ThumbURL" class="img-thumbnail" alt="profile_image" />
+              </div>
+            </div>
+
+            <div class="row">
               <div class="col-md-6">
                 <label>Product Category Name</label>
                 <p>{{productCategory.category_name}}</p>

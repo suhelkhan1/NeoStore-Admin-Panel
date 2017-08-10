@@ -11,12 +11,10 @@ export interface IUser {
     birth_date: Date,
     role: string,
     username: string,
-    is_active: boolean
+    is_active: boolean,
+    Profile_IMG: {
+        ImgURL: string,
+        ThumbUrl: string
+    }
 }
 
-
-export interface IUser2{
-    username: string,
-    email: string,
-    image: string
-}

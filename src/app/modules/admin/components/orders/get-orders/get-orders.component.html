@@ -12,27 +12,29 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="productCategoryTable" class="table table-bordered table-striped">
+            <table id="ordersTable" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>Id</th>                
-                  <th>Created date</th>
-                  <th>Product Id</th>
                   <th>User Id</th>
+                  <th>Status</th>
+                  <th>Total</th>
+                  <th>Created date</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor=" let order of orders">
                   <td>{{order.id}}</td>
-                  <td>{{order.category_name}}</td>
-                  <td>{{order.category_description}}</td>                  
-                  <td>{{order.category_isactive}}</td>                  
+                  <td>{{order.userid}}</td>
+                  <td>{{order.orderstatus}}</td>                  
+                  <td>{{order.ordertotal}}</td>
+                  <td>{{order.createon}}</td>                  
                   <th class="text-center">
                     <div class="btn btn-group no-padding">
-                      <button (click)="veiwClickListner(order)"type="button" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></button>
-                      <button (click)="editClickListner(order)" type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></button>
-                      <button (click)="deleteorder(order)" type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+                      <button (click)="veiwClickListner(order.id)"type="button" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></button>
+                      <button (click)="editClickListner(order.id)" type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></button>
+                      <button (click)="deleteorder(order.id)" type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
                     </div>
                   </th>
                 </tr>

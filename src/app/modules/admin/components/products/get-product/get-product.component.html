@@ -8,13 +8,21 @@
       <!-- left column -->
       <div class="col-md-12">
         <!-- general form elements -->
-        <div class="box box-primary" *ngIf="product">
+        <div class="box box-primary" >
           <div class="box-header with-border">
             <h3 class="box-title">View Product</h3>
           </div>
           <!-- /.box-header -->
 
-          <div class="box-body">
+          <div class="box-body" *ngIf="product">
+            <div class="row">
+              <div class="col-md-6">
+              <label>Product Picture</label>
+                <div *ngFor="let img of productImg">
+                  <img [src]="img.ThumbURL100" class="img-thumbnail" alt="profile_image" />
+                </div>
+              </div>
+            </div>
             <div class="row">
               <div class="col-md-6">
                 <label>Product Name</label>

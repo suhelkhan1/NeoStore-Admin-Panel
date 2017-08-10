@@ -21,6 +21,7 @@ export class UserService {
     }).catch(this.handleError)
   }
 
+  //Get single user details
   getUser(userId): Observable<IUser>{
     this.current_user_accesToken = JSON.parse(localStorage.getItem('currentUser'))
     return this.http.get( this.url + '/' + userId + '?access_token=' + this.current_user_accesToken).map((response: Response) => {
@@ -28,7 +29,7 @@ export class UserService {
     }).catch(this.handleError)
   }
 
-  //Call For User Profile 
+  //Call for recheck loged in user details in main header
   getUserDetails(): Observable<IUser>{
     this.current_user_accesToken = JSON.parse(localStorage.getItem('currentUser'))
     this.curent_user_userId = JSON.parse(localStorage.getItem('currentUserId'))

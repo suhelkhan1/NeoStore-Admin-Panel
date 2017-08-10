@@ -7,7 +7,8 @@ import { jqxFileUploadComponent } from 'jqwidgets-framework/jqwidgets-ts/angular
 import { UserService } from '../../../providers/user/user.service'
 import { IUser } from '../../../interfaces/user.model'
 import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
-import { EqualValidatorDirective } from '../../../directives/equal-validator/equal-validator.directive'
+//import { EqualValidatorDirective } from '../../../directives/equal-validator/equal-validator.directive'
+import { ImageService } from '../../../providers/image/image.service'
 
 @Component({
   selector: 'app-add-user',
@@ -23,6 +24,7 @@ export class AddUserComponent implements OnInit {
     private userService: UserService,
     private toastr: ToastsManager,
     private router: Router,
+    private imageService: ImageService,
     @Inject(JQ_TOKEN) private $: any
   ) {}
 
@@ -37,7 +39,11 @@ export class AddUserComponent implements OnInit {
   private phoneNumber: FormControl
   private dateOfBirth: FormControl
   private username: FormControl
+  private fileLabel: FormControl
 
+  userId: string 
+  hasImage: boolean = false
+  file: File
 
   ngOnInit() {
     this.body.classList.add(this.bodyClasses);
@@ -90,6 +96,7 @@ export class AddUserComponent implements OnInit {
       Validators.minLength(4),
       Validators.maxLength(24)
     ])
+    this.fileLabel = new FormControl('No file choosen')
 
     this.addUserForm = new FormGroup ({
       firstName: this.firstName,
@@ -101,11 +108,13 @@ export class AddUserComponent implements OnInit {
       dateOfBirth: this.dateOfBirth,
       password: this.password,
       confirmPassword: this.confirmPassword,
-      username: this.username
+      username: this.username,
+      fileLabel: this.fileLabel
     })
   }
 
   addUser(formValues){
+    console.log(formValues)
     let userInfo = {
       first_name: formValues.firstName ,
       last_name: formValues.lastName ,
@@ -116,18 +125,54 @@ export class AddUserComponent implements OnInit {
       birth_date: formValues.dateOfBirth,
       is_active: true,
       username: formValues.username,
-      password: formValues.password
+      password: formValues.password,
     }
-    console.log(userInfo)
-    this.userService.addUser(userInfo).subscribe(
-      (response: IUser) => {
-        this.toastr.success('User added', 'Success!')
-        this.router.navigate(['/admin/getusers'])
+    if(this.hasImage){
+      this.userService.addUser(userInfo).subscribe(
+        (response: IUser) => {
+          this.userId = response.id
+          this.fileUploadEvent()
+          this.toastr.success('User added', 'Success!')
+          this.router.navigate(['/admin/getusers'])
+          return response
+        },
+        (error) => {
+          let er = JSON.parse(error._body)
+          this.toastr.error(er.error.message, 'Error!', {dismiss: 'click'})
+        }
+      )
+    }
+  }
+
+  fileEvent(event){
+    this.hasImage = true
+    let inputFile = event
+    let numFiles = inputFile.currentTarget.files.length
+    this.file = inputFile.target.files[0]
+    let label = inputFile.currentTarget.value.replace(/^.*[\\\/]/, '');
+    if(numFiles === 0){
+      this.hasImage = false
+      this.fileLabel.setValue('No file choosen')
+    } else if(numFiles > 1 && numFiles !== 0){
+        this.fileLabel.setValue(numFiles + ' files')
+    } else {
+        this.fileLabel.setValue(label)
+    }
+  }
+
+  fileUploadEvent(){
+    let imageInfo = {
+      file: this.file, 
+      userId: this.userId,
+    }
+    this.imageService.imageUploadUser(imageInfo).subscribe(
+      (response) =>{
+        this.toastr.success('Image Uploaded', 'Success!')
         return response
       },
-      (error) => {
-        let er = JSON.parse(error._body)
-        this.toastr.error(er.error.message, 'Error!', {dismiss: 'click'})
+      (error: Error) =>{
+        this.toastr.error('Image Upload Failed', 'Error!')
+        return error
       }
     )
   }

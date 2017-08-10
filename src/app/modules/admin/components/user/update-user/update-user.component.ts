@@ -6,6 +6,7 @@ import { ToastsManager } from 'ng2-toastr'
 import { UserService } from '../../../providers/user/user.service'
 import { IUser } from '../../../interfaces/user.model'
 import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
+import { ImageService } from '../../../providers/image/image.service'
 
 @Component({
   selector: 'app-update-user',
@@ -22,10 +23,14 @@ export class UpdateUserComponent implements OnInit {
     private toastr: ToastsManager,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private imageService: ImageService,
     @Inject(JQ_TOKEN) private $: any
   ) {}
 
   user: IUser
+  file: File
+  hasImage: boolean = false
+  profileImg: any
 
   updateUserForm: FormGroup
   private userRoles: FormControl
@@ -37,6 +42,7 @@ export class UpdateUserComponent implements OnInit {
   private phoneNumber: FormControl
   private dateOfBirth: FormControl
   private username: FormControl
+  private fileLabel: FormControl
 
   ngOnInit() {
     this.body.classList.add(this.bodyClasses);   //add the class   
@@ -47,10 +53,6 @@ export class UpdateUserComponent implements OnInit {
         increaseArea: "20%" // optional
       })
     })
-    /*this.$('input').on('change', (event)=>{
-      this.gender.setValue(event.currentTarget.value) 
-      //console.log(this.gender)
-    })*/
 
     this.userRoles = new FormControl('', [Validators.required])
     this.isActive = new FormControl('', [Validators.required])
@@ -66,6 +68,7 @@ export class UpdateUserComponent implements OnInit {
     this.phoneNumber = new FormControl('', [Validators.required])
     this.dateOfBirth = new FormControl('', [Validators.required])
     this.username = new FormControl('', [Validators.required])
+    this.fileLabel = new FormControl('No file choosen')
 
     this.updateUserForm = new FormGroup ({
       userRoles: this.userRoles,
@@ -76,7 +79,8 @@ export class UpdateUserComponent implements OnInit {
       gender: this.gender,
       phoneNumber: this.phoneNumber,
       dateOfBirth: this.dateOfBirth,
-      username: this.username
+      username: this.username,
+      fileLabel: this.fileLabel
     })
 
     this.activatedRoute.params.subscribe( (params: Params) => {
@@ -89,6 +93,7 @@ export class UpdateUserComponent implements OnInit {
     this.userService.getUser(id).subscribe(
       (response: IUser) => {
         this.populateUserForm(response)
+        this.profileImg = response.Profile_IMG
         return response
       },
       (error: Error) => {
@@ -116,6 +121,7 @@ export class UpdateUserComponent implements OnInit {
       username: this.user.username
     })
   }
+
   updateUser(formValues){
     let userInfo = {
       id: this.user.id,
@@ -132,12 +138,46 @@ export class UpdateUserComponent implements OnInit {
     console.log(userInfo)
     this.userService.updateUser(userInfo).subscribe(
       (response: IUser) => {
+        this.fileUploadEvent()
         this.toastr.success('User Updated', 'Success!')
         this.router.navigate(['/admin/getusers'])
         return response
       },
       (error: Error) => {
         this.toastr.error(error.message, 'Error!')
+        return error
+      }
+    )
+  }
+
+  fileEvent(event){
+    this.hasImage = true
+    let inputFile = event
+    let numFiles = inputFile.currentTarget.files.length
+    this.file = inputFile.target.files[0]
+    let label = inputFile.currentTarget.value.replace(/^.*[\\\/]/, '');
+    if(numFiles === 0){
+      this.hasImage = false
+      this.fileLabel.setValue('No file choosen')
+    } else if(numFiles > 1 && numFiles !== 0){
+        this.fileLabel.setValue(numFiles + ' files')
+    } else {
+        this.fileLabel.setValue(label)
+    }
+  }
+
+  fileUploadEvent(){
+    let imageInfo = {
+      file: this.file, 
+      userId: this.user.id,
+    }
+    this.imageService.imageUploadUser(imageInfo).subscribe(
+      (response) =>{
+        this.toastr.success('Image Uploaded', 'Success!')
+        return response
+      },
+      (error: Error) =>{
+        this.toastr.error('Image Upload Failed', 'Error!')
         return error
       }
     )

@@ -1,0 +1,52 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <app-content-header></app-content-header>
+
+  <section class="content">
+    <div class="row">
+      <div class="col-xs-12">
+        <!-- /.box-header -->
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Cart List</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <table id="cartsTable" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Id</th>                
+                  <th>User Id</th>
+                  <th>Product Id</th>
+                  <th>Quantity</th>
+                  <th>Stock</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let cart of carts">
+                  <td>{{cart.id}}</td>
+                  <td>{{cart.userid}}</td>
+                  <td>{{cart.productid}}</td>                  
+                  <td>{{cart.productqty}}</td>
+                  <td class="text-center">
+                      <i *ngIf="cart.instock" class="text-center text-success fa fa-check" aria-hidden="true"></i>
+                      <i *ngIf="!cart.instock" class="text-danger fa fa-times-circle" aria-hidden="true"></i>
+                    </td>                  
+                  <th class="text-center">
+                    <div class="btn btn-group no-padding">
+                      <button (click)="veiwClickListner(cart.id)"type="button" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></button>
+                      <button (click)="editClickListner(cart.id)" type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></button>
+                      <button (click)="deletecart(cart.id)" type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+                    </div>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>

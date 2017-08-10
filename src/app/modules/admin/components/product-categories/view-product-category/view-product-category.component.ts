@@ -27,8 +27,9 @@ export class ViewProductCategoryComponent implements OnInit {
 
   getProductCategory(id){
     this.productService.getProductCategory(id).subscribe( 
-      (productCategory: IProductCategory) => {
-        this.productCategory = productCategory
+      (response: IProductCategory) => {
+        this.productCategory = response
+        return response
       },
       (error: any) => error
     )

@@ -4,7 +4,7 @@ import { Router }   from '@angular/router';
 import { ToastsManager } from 'ng2-toastr'
 
 import { AuthService } from '../../providers/auth/auth.service'
-
+import { UserService } from '../../modules/admin/providers/user/user.service'
 
 @Component({
   selector: 'app-login',
@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private userService:UserService,
     private router: Router,
     private toastr: ToastsManager
   ) { }
@@ -59,6 +60,20 @@ export class LoginComponent implements OnInit {
       email: this.email,
       password: this.password
     })
+
+    //Checking for persistent login
+    this.userService.getUserDetails().subscribe(
+      (response) => {
+        this.router.navigate(['/admin'])
+        return response
+      },
+      (error: Error) => {
+        /*this.toastr.error('Not authenticated user', 'Access Denied')*/
+        this.router.navigate(['/login'])
+        return error
+      }
+    )
+    
   }
 
   loginAdmin(formValues){

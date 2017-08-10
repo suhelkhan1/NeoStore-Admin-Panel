@@ -23,7 +23,8 @@
                     <label for="category_name">Category Name</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-sitemap"></i></span>
-                      <input type="text" class="form-control" formControlName="category_name" [ngClass]="{ 'error' : category_name.invalid && category_name.dirty }" id="category_name" placeholder="Enter Category Name">
+                      <input type="text" class="form-control" formControlName="category_name" [ngClass]="{ 'error' : category_name.invalid && category_name.dirty }"
+                        id="category_name" placeholder="Enter Category Name">
                     </div>
                     <em class="text-danger" *ngIf="category_name.invalid && category_name.dirty">Maximum 20 caracter allowed</em>
                   </div>
@@ -33,9 +34,47 @@
                     <label for="category_description">Category Description</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-paragraph"></i></span>
-                      <textarea type="text" class="form-control" formControlName="category_description" [ngClass]="{ 'error' : category_description.invalid && category_description.dirty }" id="category_description" placeholder="Enter Description"></textarea>
+                      <textarea type="text" class="form-control" formControlName="category_description" [ngClass]="{ 'error' : category_description.invalid && category_description.dirty }"
+                        id="category_description" placeholder="Enter Description"></textarea>
                     </div>
                     <em class="text-danger" *ngIf="category_description.invalid && category_description.dirty">Minimum 10 caracter allowed</em>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-10">
+                  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                    aria-controls="collapseExample" (click)="showImage = !showImage"> 
+                          {{showImage ? 'Show Images' : 'Hide Images'}}                          
+                  </button>
+                  <div class="collapse" id="collapseExample">
+                    <br>
+                    <div class="col-md-3" >
+                      <div class="img-wrap" *ngIf="productCatImages">
+                        <span class="close"><i class="fa fa-times-circle text-danger"></i></span>
+                        <img [src]="productCatImages.ThumbURL" class="img-thumbnail" alt="product_image" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="fileUpload">Upload File</label>
+                  <div class="input-group">
+                    <label class="input-group-btn">
+                      <span class="btn btn-primary">
+                          Browse&hellip; 
+                          <input type="file"
+                            (change)="fileEvent($event)"
+                            class="form-control"
+                            style="display: none;"                                               
+                            id="fileUpload"                              
+                            name="fileUpload">
+                      </span>
+                  </label>
+                    <input type="text" formControlName="fileLabel" class="form-control" readonly>
                   </div>
                 </div>
               </div>

@@ -1,8 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 
-import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
-import { ImageUploadService } from '../../../providers/image-upload/image-upload.service'
+import { ImageService } from '../../../providers/image/image.service'
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -13,13 +12,12 @@ export class FileUploadComponent implements OnInit {
 
 
   constructor(
-    @Inject(JQ_TOKEN) private $:any,
-    private imageUploadService: ImageUploadService
+    private imageService: ImageService
   ) {}
 
   fileUpload: any
   uploadFiles: string = "No file choosen"
-  file: any
+  files: any
   input: any
   label: any
   numFiles: any
@@ -32,7 +30,7 @@ export class FileUploadComponent implements OnInit {
   fileEvent(event){
     this.input = event
     this.numFiles = this.input.currentTarget.files.length
-    this.file = this.input.currentTarget.files[0]
+    this.files = this.input.currentTarget.files[0]
     this.label = this.input.currentTarget.value.replace(/^.*[\\\/]/, '');
     if(this.numFiles === 0){
       this.uploadFiles = 'No file choosen'
@@ -41,9 +39,16 @@ export class FileUploadComponent implements OnInit {
     } else {
         this.uploadFiles = this.label
     }
-    this.imageUploadService.insertData(this.file)
   }
 
-  
-
+  uploadImage(){
+    let imageInfo = {
+      files: this.files,
+      productId: '59770dbcee32740640a49f59'
+    }
+    this.imageService.imageUploadProduct(imageInfo).subscribe(
+      response => response,
+      error => error
+    )
+  }
 }

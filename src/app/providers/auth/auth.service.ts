@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 import { Observable } from 'rxjs'
 import { IUserResponse } from '../../interfaces/user.model'
+import { IUser } from '../../modules/admin/interfaces/user.model'
 
 @Injectable()
 export class AuthService {
@@ -36,6 +37,7 @@ export class AuthService {
     return this.http.post(this.url + 'logout?access_token=' + this.accessToken, options).map( (response: Response)=>{
       // remove user from local storage to log user out
       localStorage.removeItem('currentUser');
+      localStorage.removeItem('currentUserId');
       return response.json()
     })
   }
@@ -63,8 +65,7 @@ export class AuthService {
     return this.loggedIn
   }
 
-  handleError(error: Response) {
-    
+  handleError(error: Response) {    
     return Observable.throw(error.json());
   }
 }

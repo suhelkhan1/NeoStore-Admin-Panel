@@ -14,7 +14,7 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form [formGroup]="addProductForm" (ngSubmit)="addProduct(addProductForm.value)" novalidate>
+          <form [formGroup]="addProductForm" (ngSubmit)="addProductForm.invalid || addProduct(addProductForm.value)" novalidate>
             <div class="box-body">
               <div class="row">
                 <div class="col-md-4">
@@ -67,9 +67,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
 
-              </div>
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
@@ -95,14 +93,14 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="colour">Colour</label>
+                    <label for="material">Material</label>
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-paint-brush"></i></span>
-                      <input type="color" class="form-control" formControlName="colour" [ngClass]="{ 'error' : colour.invalid && colour.dirty }"
-                        name="colour">
+                      <span class="input-group-addon"><i class="fa fa-cubes"></i></span>
+                      <input type="text" class="form-control" formControlName="material" [ngClass]="{ 'error' : material.invalid && material.dirty }"
+                        name="material" placeholder="Enter Material">
                     </div>
-                    <em class="text-danger" *ngIf="colour.invalid && colour.dirty">Please Select Colour</em>
                   </div>
+                  <em class="text-danger" *ngIf="material.invalid && material.dirty">Please Enter Material</em>
                 </div>
               </div>
               <div class="row">
@@ -117,24 +115,90 @@
                     <em class="text-danger" *ngIf="dimension.invalid && dimension.dirty">Please Enter Dimension</em>
                   </div>
                 </div>
+
+                <div class="col-md-4">
+                  <label for="fileUpload">Upload File</label>
+                  <div class="input-group">
+                    <label class="input-group-btn">
+                        <span class="btn btn-primary">
+                            Browse&hellip; 
+                            <input type="file"
+                              (change)="fileEvent($event)"
+                              class="form-control"
+                              style="display: none;"                                               
+                              id="fileUpload"                                                      
+                              name="fileUpload">
+                        </span>
+                    </label>
+                    <input type="text" formControlName="fileLabel" class="form-control" readonly>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="material">Material</label>
+                    <label for="colour">Colour</label>
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-cubes"></i></span>
-                      <input type="text" class="form-control" formControlName="material" [ngClass]="{ 'error' : material.invalid && material.dirty }"
-                        name="material" placeholder="Enter Material">
+                      <span class="input-group-addon"><i class="fa fa-paint-brush"></i></span>
+                      <input type="color" class="form-control" formControlName="colour" [ngClass]="{ 'error' : colour.invalid && colour.dirty }"
+                        name="colour">
                     </div>
+                    <em class="text-danger" *ngIf="colour.invalid && colour.dirty">Please Select Colour</em>
                   </div>
-                  <em class="text-danger" *ngIf="material.invalid && material.dirty">Please Enter Material</em>
+                  <!--<div class="form-group">
+                    <label for="colour">Colour</label>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-sitemap"></i></span>
+                      <select name="colour" formControlName="colour" ngControl="colour" class="form-control" [ngClass]="{ 'error' : colour.invalid && colour.dirty }">
+                        <option [selected]="colour.value == null"  value="" >Select</option>
+                        <option *ngFor="let color of colors" [value]='color' [ngStyle]="{'background-color': color.color_code}">
+                          <p class="color-box" [ngStyle]="{'background-color': color.color_code}"></p>
+                          {{color.color_name}}
+                        </option>                        
+                      </select>
+                    </div>
+                    <em class="text-danger" *ngIf="colour.invalid && colour.dirty">Please Select Color</em>
+                  </div> -->
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="colour">Select Colour</label>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                      <div class="panel panel-primary">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#colors">
+                              <i class="fa fa-lg fa-angle-double-down"></i> Colors
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="colors" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="list-group-item">
+                            <ul class="list-inline">
+                              <li *ngFor="let color of colors">
+                                <button type="button"
+                                        (click)="setColor(color)"                                  
+                                        placement="top"                    
+                                        class="color-box" 
+                                        [ngStyle]="{'background': color.color_code}">
+                                </button>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>                        
+                    </div>
+                  </div>                
                 </div>
               </div>
-              <app-file-upload></app-file-upload>
+
             </div>
             <!-- /.box-body -->
 
             <div class="box-footer">
-              <button type="submit" [disabled]="addProductForm.invalid" class="btn btn-primary">Save</button>
+              <button type="submit" [disabled]="addProductForm.invalid && !hasImage" class="btn btn-primary">Save</button>
               <button type="submit" [routerLink]="['/admin/getproducts']" class="btn btn-danger">Cancel</button>
             </div>
           </form>
