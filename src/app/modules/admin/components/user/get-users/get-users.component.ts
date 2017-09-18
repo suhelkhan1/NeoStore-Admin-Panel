@@ -21,6 +21,13 @@ export class GetUsersComponent implements OnInit {
   }
   users: any
 
+  ngOnInit() {
+    this.userService.getUsers().subscribe( (response) => {
+      this.users = response
+      this.getUser()
+    });
+  }
+
   getUser(){
     this.$(document).ready( ()=> {
       let el = this.$(this.elementRef.nativeElement).find("#userTable")[0];
@@ -36,13 +43,13 @@ export class GetUsersComponent implements OnInit {
   editClickListner(user){
     this.route.navigate(['admin/updateuser/', user.id])
   }
-  ngOnInit() {
-    this.userService.getUsers().subscribe( (response) => {
-      this.users = response
-      this.getUser()
-    });
-
-    
+  deleteClickListner(user){
+    user.is_active = false;
+    this.userService.deleteUser(user).subscribe(
+      (response) =>{
+        //this.getUser()
+      }
+    )
   }
 
 }

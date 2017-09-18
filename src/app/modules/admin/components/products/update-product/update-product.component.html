@@ -68,7 +68,28 @@
                 </div>
               </div>
               <div class="row">
-
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="dimension">Dimension</label>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                      <input type="tel" class="form-control" formControlName="dimension" [ngClass]="{ 'error' : dimension.invalid && dimension.dirty }"
+                        name="dimension" placeholder="Enter Dimension">
+                    </div>
+                    <em class="text-danger" *ngIf="dimension.invalid && dimension.dirty">Please Enter Dimension</em>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="material">Material</label>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-cubes"></i></span>
+                      <input type="text" class="form-control" formControlName="material" [ngClass]="{ 'error' : material.invalid && material.dirty }"
+                        name="material" placeholder="Enter Material">
+                    </div>
+                  </div>
+                  <em class="text-danger" *ngIf="material.invalid && material.dirty">Please Enter Material</em>
+                </div>
               </div>
               <div class="row">
                 <div class="col-md-4">
@@ -93,6 +114,8 @@
                     <em class="text-danger" *ngIf="stockin.invalid && stockin.dirty">Please Enter Stock</em>
                   </div>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="colour">Colour</label>
@@ -104,29 +127,31 @@
                     <em class="text-danger" *ngIf="colour.invalid && colour.dirty">Please Select Colour</em>
                   </div>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="dimension">Dimension</label>
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                      <input type="tel" class="form-control" formControlName="dimension" [ngClass]="{ 'error' : dimension.invalid && dimension.dirty }"
-                        name="dimension" placeholder="Enter Dimension">
+                    <label for="colour">Select Colour</label>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                      <div class="panel panel-primary">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#colors">
+                              <i class="fa fa-lg fa-angle-double-down"></i> Colors
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="colors" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="list-group-item">
+                            <ul class="list-inline">
+                              <li *ngFor="let color of colors">
+                                <button type="button" (click)="setColor(color)" placement="top" class="color-box" [ngStyle]="{'background': color.color_code}">
+                                </button>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <em class="text-danger" *ngIf="dimension.invalid && dimension.dirty">Please Enter Dimension</em>
                   </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="material">Material</label>
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-cubes"></i></span>
-                      <input type="text" class="form-control" formControlName="material" [ngClass]="{ 'error' : material.invalid && material.dirty }"
-                        name="material" placeholder="Enter Material">
-                    </div>
-                  </div>
-                  <em class="text-danger" *ngIf="material.invalid && material.dirty">Please Enter Material</em>
                 </div>
               </div>
               <div class="row">

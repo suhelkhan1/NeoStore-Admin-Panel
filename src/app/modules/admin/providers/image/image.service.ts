@@ -4,6 +4,7 @@ import { Observable } from 'rxjs'
 import 'rxjs/add/operator/toPromise';
 
 import { IImage } from '../../interfaces/image.model'
+import { imageUrl } from '../apiUrls';
 
 @Injectable()
 export class ImageService {
@@ -12,15 +13,14 @@ export class ImageService {
     private http: Http
   ) { }
 
-  url = 'http://10.0.100.213:3000/api/images/upload'
 
   imageUploadUser(imageInfo): Observable<IImage>{
     let formdata = new FormData()
     formdata.append("file", imageInfo.file)
-    formdata.append("userAccountId", imageInfo.userId)
+    formdata.append("userId", imageInfo.userId)
     console.log(formdata)
 
-    return this.http.post(this.url, formdata).map( (response: Response) => {
+    return this.http.post(imageUrl, formdata).map( (response: Response) => {
       return <IImage>response.json()
     }).catch(this.handleError)
   }
@@ -30,7 +30,7 @@ export class ImageService {
     formdata.append("file", imageInfo.file)
     formdata.append("productId", imageInfo.productId)
 
-    return this.http.post(this.url, formdata).map( (response: Response) => {
+    return this.http.post(imageUrl, formdata).map( (response: Response) => {
       return <IImage>response.json()
     }).catch(this.handleError)
   }
@@ -41,7 +41,7 @@ export class ImageService {
     formdata.append("categoryId", imageInfo.productCatId)
     console.log(formdata)
 
-    return this.http.post(this.url, formdata).map( (response: Response) => {
+    return this.http.post(imageUrl, formdata).map( (response: Response) => {
       return <IImage>response.json()
     }).catch(this.handleError)
   }

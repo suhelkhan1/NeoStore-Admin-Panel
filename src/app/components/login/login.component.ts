@@ -78,14 +78,14 @@ export class LoginComponent implements OnInit {
 
   loginAdmin(formValues){
     this.authService.loginAdmin(formValues).subscribe( 
-      response => {
+      (response) => {
           this.user = response;
           this.toastr.success('logged in', 'Success!')
-          this.router.navigate(['admin']);   
+          this.router.navigate(['/admin']);   
       },
       (error: Error) => {
           this.loginInvalid = true
-          this.errorMessage = error["error"].message
+          this.errorMessage = error["error"]
       })
   }
 

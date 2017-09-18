@@ -30,7 +30,6 @@ export class UpdateUserComponent implements OnInit {
   user: IUser
   file: File
   hasImage: boolean = false
-  profileImg: any
 
   updateUserForm: FormGroup
   private userRoles: FormControl
@@ -93,7 +92,6 @@ export class UpdateUserComponent implements OnInit {
     this.userService.getUser(id).subscribe(
       (response: IUser) => {
         this.populateUserForm(response)
-        this.profileImg = response.Profile_IMG
         return response
       },
       (error: Error) => {
@@ -171,16 +169,18 @@ export class UpdateUserComponent implements OnInit {
       file: this.file, 
       userId: this.user.id,
     }
-    this.imageService.imageUploadUser(imageInfo).subscribe(
-      (response) =>{
-        this.toastr.success('Image Uploaded', 'Success!')
-        return response
-      },
-      (error: Error) =>{
-        this.toastr.error('Image Upload Failed', 'Error!')
-        return error
-      }
-    )
+    if(imageInfo.file){
+      this.imageService.imageUploadUser(imageInfo).subscribe(
+        (response) =>{
+          this.toastr.success('Image Uploaded', 'Success!')
+          return response
+        },
+        (error: Error) =>{
+          this.toastr.error('Image Upload Failed', 'Error!')
+          return error
+        }
+      )
+    }
   }
 
   ngOnDestroy() {

@@ -133,8 +133,8 @@
 
                 <div class="col-md-4">
                   <label>Profile Picture</label>
-                  <div *ngIf="profileImg">                    
-                    <img [src]="profileImg.ThumbURL" alt="profile_pic" class="img-thumbnail" />
+                  <div *ngIf="user">                    
+                    <img [src]="user.images.ImgURL" alt="profile_pic" class="img-thumbnail" />
                   </div>
                 </div>
               </div>              

@@ -12,9 +12,15 @@ export interface IUser {
     role: string,
     username: string,
     is_active: boolean,
-    Profile_IMG: {
+    images: {
+        id: string,
+        userId: string,
+        name: string,
+        type: string,
+        isActive: boolean,
+        container: string,
         ImgURL: string,
-        ThumbUrl: string
+        ThumbURL: string
     }
 }
 

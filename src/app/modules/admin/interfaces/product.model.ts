@@ -7,7 +7,12 @@ export interface IProduct {
     product_avg_rating: number,
     product_view_count: number,
     product_stock: number,
-    product_color: string,
+    product_color: {
+        color_code: string, 
+        color_name: string, 
+        color_parent: string,
+        id: string,
+    },
     product_dimension: string,
     product_material: string,
     id: string,

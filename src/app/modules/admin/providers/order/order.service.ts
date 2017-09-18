@@ -4,6 +4,7 @@ import { Observable } from 'rxjs'
 
 //Order Model
 import { IOrder } from '../../interfaces/oder.model'
+import { ordersUrl } from '../apiUrls';
 
 @Injectable()
 export class OrderService {
@@ -13,16 +14,15 @@ export class OrderService {
   ) { }
 
   accessToken = JSON.parse(localStorage.getItem('currentUser'))
-  url = 'http://10.0.100.213:3000/api/orders'
 
   getOrders(): Observable<IOrder> {
-    return this.http.get(this.url).map( (response: Response) =>{
+    return this.http.get(ordersUrl).map( (response: Response) =>{
       return <IOrder> response.json()
     }).catch(this.handleError)
   }
 
   getOrder(orderId): Observable<IOrder> {
-    return this.http.get(this.url + '/' + orderId + '?access_token=' + this.accessToken).map( (response: Response) =>{
+    return this.http.get(ordersUrl + '/' + orderId + '?access_token=' + this.accessToken).map( (response: Response) =>{
       return <IOrder> response.json()
     }).catch(this.handleError)
   }
@@ -31,7 +31,7 @@ export class OrderService {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
-    return this.http.patch(this.url + '/' + orderId + '?access_token=' + this.accessToken, JSON.stringify(orderId), options).map( (response: Response) =>{
+    return this.http.patch(ordersUrl + '/' + orderId + '?access_token=' + this.accessToken, JSON.stringify(orderId), options).map( (response: Response) =>{
       return <IOrder> response.json()
     }).catch(this.handleError)
   }
@@ -39,7 +39,7 @@ export class OrderService {
   deleteOrder(orderId): Observable<IOrder> {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    return this.http.delete(this.url + '/Orders/' + orderId + '?access_token=' + this.accessToken, options).map( (respnse: Response)=>{
+    return this.http.delete(ordersUrl + '/Orders/' + orderId + '?access_token=' + this.accessToken, options).map( (respnse: Response)=>{
       return <IOrder>respnse.json()
     })
   }

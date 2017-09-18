@@ -6,6 +6,7 @@ import { jqxFileUploadComponent } from 'jqwidgets-framework/jqwidgets-ts/angular
 import { ToastsManager } from 'ng2-toastr'
 import { ProductService } from '../../../providers/product/product.service'
 import { ImageService } from '../../../providers/image/image.service'
+import { ColorService } from './../../../providers/color/color.service';
 import { JQ_TOKEN } from '../../../providers/jquery/jquery.service'
 
 //Models for Product and Product Category 
@@ -25,6 +26,7 @@ export class UpdateProductComponent implements OnInit {
     private toastr: ToastsManager,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private colorService: ColorService,
     @Inject(JQ_TOKEN) private $: any
   ) { }
 
@@ -32,6 +34,8 @@ export class UpdateProductComponent implements OnInit {
   productCategories: IProductCategory
   productImages: any
   showImage: boolean = true
+  colors
+  currentColor
 
   updateProductForm: FormGroup
   private productCategory: FormControl
@@ -59,7 +63,7 @@ export class UpdateProductComponent implements OnInit {
     this.description = new FormControl('', [Validators.required])
     this.cost = new FormControl('', [Validators.required])
     this.stockin = new FormControl('', [Validators.required])
-    this.colour = new FormControl('', [Validators.required])
+    this.colour = new FormControl({value:'', disabled: true}, [Validators.required])
     this.dimension = new FormControl('', [Validators.required])
     this.material = new FormControl('', [Validators.required])
     this.fileLabel = new FormControl('')
@@ -86,6 +90,17 @@ export class UpdateProductComponent implements OnInit {
       response => this.productCategories = response,
       error => error
     )
+
+    this.colorService.getColors().subscribe(
+      (response)=>{
+        this.colors = response
+        return response
+      },
+      (error: Error)=>{
+        this.toastr.error(error['error'].statusCode, 'Error!')
+        return error
+      }
+    )
   }
 
   getProduct(id){
@@ -101,6 +116,11 @@ export class UpdateProductComponent implements OnInit {
       }
     )
   }
+  setColor(color){
+    this.colour.setValue(color.color_code)
+    this.currentColor = color
+  }
+
 
   polpulateupdateProductForm(product: IProduct){
     if (this.updateProductForm) {
@@ -114,7 +134,7 @@ export class UpdateProductComponent implements OnInit {
       producer: this.product.product_producer,
       description: this.product.product_description,
       productCategory: this.product.categoryId,
-      colour: this.product.product_color,
+      colour: this.product.product_color.color_code,
       dimension: this.product.product_dimension,
       material: this.product.product_material,
       cost: this.product.product_cost,
@@ -175,16 +195,18 @@ export class UpdateProductComponent implements OnInit {
       file: this.file,
       productId: this.product.id
     }
-    this.imageService.imageUploadProduct(imageInfo).subscribe(
-      (response) =>{
-        this.toastr.success('Image Uploaded', 'Success!')
-        return response
-      },
-      (error: Error) =>{
-        this.toastr.error('Image Upload Failed', 'Error!')
-        return error
-      }
-    )
+    if(imageInfo.file){
+      this.imageService.imageUploadProduct(imageInfo).subscribe(
+        (response) =>{
+          this.toastr.success('Image Uploaded', 'Success!')
+          return response
+        },
+        (error: Error) =>{
+          this.toastr.error('Image Upload Failed', 'Error!')
+          return error
+        }
+      )
+    }
   }
 
 }

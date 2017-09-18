@@ -41,3 +41,11 @@
     cursor: inherit;
     display: block;
 }
+
+
+.color-box {
+    border: 1px solid rgba(0, 0, 0, 0.24);
+    width: 34px;
+    height: 20px;
+    margin-top: 4px;
+  }

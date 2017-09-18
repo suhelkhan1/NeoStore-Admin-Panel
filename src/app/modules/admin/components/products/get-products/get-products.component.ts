@@ -40,7 +40,10 @@ export class GetProductsComponent implements OnInit {
 
     this.$(document).ready( ()=> {
       let el = this.$(this.elementRef.nativeElement).find("#productsTable")[0];
-      this.$(el).DataTable();
+      this.$(el).DataTable({
+        "lengthMenu": [ [10, 25, 100, -1], [10, 25, 100, "All"] ],
+        "pageLength": 10
+      });
     })
   }
 
